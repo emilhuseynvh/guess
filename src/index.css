@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: 'Futura PT Light', 'Century Gothic', 'applegothic' !important;
+    overflow-x: hidden !important;
+}
+
+div.pt-5.h-56.overflow-y-auto::-webkit-scrollbar {
+    width: 4px !important;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+    background-color: #757575;
+    border-radius: 12px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb:hover {
+    background: #ebebeb;
+}
+
+.overflow-y-auto {
+    scrollbar-width: thin;
+    scrollbar-color: #a9a9a9 #f1f1f1;
+}
+
+
+body,
+div,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span {
+    letter-spacing: .05rem;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+.filter::before {
+    content: "";
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+    margin: 0px;
+}
+
+.grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr))
+}
+
+.grid-cols-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr))
+}
+
+.grid-cols-6 {
+    grid-template-columns: repeat(2, minmax(0, 1fr))
+}
+
+@media only screen and (min-width: 768px) {
+    .grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr))
+    }
+
+    .grid-cols-4 {
+        grid-template-columns: repeat(4, minmax(0, 1fr))
+    }
+
+    .grid-cols-6 {
+        grid-template-columns: repeat(6, minmax(0, 1fr))
+    }
+
+}
+
+
+/* SLIDER */
+.next-arrow{
+    position: absolute !important;
+    right: 0 !important;
+    top: 50% !important;
+    transform: translateY(-50%);
+    font-size: 1.4rem;
+}
+.prev-arrow{
+    position: absolute !important;
+    z-index: 2;
+    left: 0 !important;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.4rem;
+}

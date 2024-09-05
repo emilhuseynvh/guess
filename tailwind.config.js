@@ -11,7 +11,11 @@ export default {
       },
       backgroundImage: {
         'brown': "url('assets/img/brown.png')",
-      }
+      },
+      colors: {
+        grayCustom: '#707070',
+        lightGray: '#F6F6F6'
+      },
     },
   },
   plugins: [],

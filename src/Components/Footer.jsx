@@ -1,60 +1,75 @@
-import React from 'react';
+import React, { useState } from 'react';
+import CheckBox from './Checkout/CheckBox';
+
+const footer = [
+  {
+    title: 'My Account',
+    list: [
+      'Sign-in',
+      'Register',
+      'Order history',
+      'UNiDAYS'
+    ]
+  },
+  {
+    title: 'Customer Care',
+    list: [
+      'FAQs',
+      'Returns',
+      'Shipping',
+      'Size Charts',
+      'Gift Cards',
+      'Store Locator',
+      'Terms and Conditions',
+      'Privacy Policy',
+      'Contact Us'
+    ]
+  },
+  {
+    title: 'Our Company',
+    list: [
+      'Our Story',
+      'Sustainability'
+    ]
+  },
+  {
+    title: 'Brands',
+    list: [
+      'GUESS',
+      'Kids',
+      'Marciano',
+      'GUESS JEANS'
+    ]
+  }
+]
+
 
 const Footer = () => {
+
+  const [checkbox, setCheckbox] = useState()
+  const [flag, setFlag] = useState(null)
+
   return (
-    <footer className="bg-gray-100 py-12">
-      <div className="container mx-auto flex justify-between">
+    <footer className="bg-gray-100 py-12 relative z-40">
+      <div className="mx-auto w-[95%]  base:flex justify-between">
+        {footer.map((item, index) => {
 
-        {/* My Account Section */}
-        <div>
-          <h4 className="text-base font-medium mb-4">My Account</h4>
-          <ul className="space-y-2">
-            <li><a href="#" className="text-gray-700 hover:underline">Sign-in</a></li>
-            <li><a href="#" className="text-gray-700 hover:underline">Register</a></li>
-            <li><a href="#" className="text-gray-700 hover:underline">Order history</a></li>
-            <li><a href="#" className="text-gray-700 hover:underline">UNiDAYS</a></li>
-          </ul>
-        </div>
+          const { title, list } = item
 
-        {/* Customer Care Section */}
-        <div>
-          <h4 className="text-lg font-medium mb-4">Customer Care</h4>
-          <ul className="space-y-2">
-            <li><a href="#" className="text-gray-700 hover:underline cursor-pointer">FAQs</a></li>
-            <li><a href="#" className="text-gray-700 hover:underline cursor-pointer">Returns</a></li>
-            <li><a href="#" className="text-gray-700 hover:underline cursor-pointer">Shipping</a></li>
-            <li><a href="#" className="text-gray-700 hover:underline cursor-pointer">Size Charts</a></li>
-            <li><a href="#" className="text-gray-700 hover:underline cursor-pointer">Gift Cards</a></li>
-            <li><a href="#" className="text-gray-700 hover:underline cursor-pointer">Store Locator</a></li>
-            <li><a href="#" className="text-gray-700 hover:underline cursor-pointer">Terms and Conditions</a></li>
-            <li><a href="#" className="text-gray-700 hover:underline cursor-pointer">Privacy Policy</a></li>
-            <li><a href="#" className="text-gray-700 hover:underline cursor-pointer">Contact Us</a></li>
-          </ul>
-        </div>
-
-        {/* Our Company Section */}
-        <div>
-          <h4 className="text-lg font-medium mb-4">Our Company</h4>
-          <ul className="space-y-2">
-            <li><a href="#" className="text-gray-700 hover:underline cursor-pointer">Our Story</a></li>
-            <li><a href="#" className="text-gray-700 hover:underline cursor-pointer">Sustainability</a></li>
-          </ul>
-        </div>
-
-        {/* BRANDS */}
-        <div>
-          <h4 className="text-lg font-medium mb-4">Brands</h4>
-          <ul className="space-y-2 mb-6">
-            <li><a href="#" className="text-gray-700 hover:underline cursor-pointer">GUESS</a></li>
-            <li><a href="#" className="text-gray-700 hover:underline cursor-pointer">Kids</a></li>
-            <li><a href="#" className="text-gray-700 hover:underline cursor-pointer">Marciano</a></li>
-            <li><a href="#" className="text-gray-700 hover:underline cursor-pointer">GUESS JEANS</a></li>
-          </ul>
-        </div>
-
+          return (
+            <div key={index} className='base:w-full'>
+              <div onClick={() => setFlag(flag === index ? null : index )} className='flex justify-between items-center cursor-pointer base:cursor-default'>
+              <h4 className="text-base font-semibold mb-4">{title}</h4>
+              <svg aria-hidden="true" className={`${flag === index ? 'rotate-90' : ' rotate-0'} duration-300 base:hidden block`} width="16" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.4.571 8.43 7.6a.549.549 0 0 1 0 .8L1.4 15.429" stroke="#000" strokeWidth="1.714" strokeLinecap="round" strokeLinejoin="round"></path></svg>
+              </div>
+              <ul className={`${flag === index ? 'max-h-[500px]' : 'max-h-0'} transition-all duration-300 base:max-h-[500px] overflow-hidden  space-y-2 mb-6`}>
+                {list.map((l, i) => <li><a key={i} href="#" className="text-gray-700 text-sm hover:underline cursor-pointer">{l}</a></li>)}
+              </ul>
+            </div>
+          )
+        })}
         {/* Newsletter Section */}
-        <div>
-
+        <div className='w-full flex justify-center'>
           <div>
             <h4 className="text-red-500 font-bold mb-2">BE THE FIRST TO KNOW</h4>
             <h3 className='text-[1.25rem] font-medium tracking-[2px]'>Join for the latest trends</h3>
@@ -74,17 +89,13 @@ const Footer = () => {
                   <span className="ml-2">Both</span>
                 </label>
               </div>
-              <div className="flex">
-                <input
-                  type="email"
-                  placeholder="Email Address"
-                  className="w-full p-2 border border-gray-300 rounded-l-md focus:outline-none"
-                />
-                <button className="px-6 py-2 bg-black text-white rounded-r-md">Sign Up</button>
+              <div className="flex w-full base:w-[40vw]">
+                <input type="email" placeholder="Email Address" className="w-full p-2 border border-gray-300 rounded-l-md outline-none" />
+                <button className="px-6 py-4 bg-black text-white rounded-r-md whitespace-nowrap select-none">Sign Up</button>
               </div>
               <label className="flex items-center mt-4">
-                <input type="checkbox" className="form-checkbox text-black" />
-                <span className="ml-2 text-gray-600">By joining, you agree to GUESS Terms & Conditions</span>
+                <CheckBox />
+                <span className="ml-2 text-gray-600 select-none">By joining, you agree to GUESS Terms & Conditions</span>
               </label>
             </form>
           </div>

@@ -23,10 +23,10 @@ const Collection = () => {
       <Top grid={grid} setGrid={setGrid} />
       <TopMobile />
       <div className='flex'>
-        <div className='w-1/5 md:block hidden'>
+        <div className='w-1/5 lg:block hidden'>
           <FilterMenu />
         </div>
-        <div className={`md:w-4/5 w-full gap-4 grid grid-cols-${grid}`}>
+        <div className={`lg:w-4/5 w-full gap-4 grid grid-cols-${grid}`}>
           {arr.map((_, i) => (
             <div key={i}>
               <Card />

@@ -1,8 +1,8 @@
 import React from 'react'
-import BreadCrumbs from '../Components/BreadCrumbs'
-import CartElement from '../Components/Cart/CartElement'
-import MiniCartElement from '../Components/Cart/MiniCartElement'
-import CartBottom from '../Components/Cart/CartBottom'
+import CartElement from '../../Components/MainPage/Cart/CartElement'
+import MiniCartElement from '../../Components/MainPage/Cart/MiniCartElement'
+import CartBottom from '../../Components/MainPage/Cart/CartBottom'
+import BreadCrumbs from '../../Components/MainPage/BreadCrumbs'
 
 const product = [
     {

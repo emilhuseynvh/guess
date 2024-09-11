@@ -1,6 +1,6 @@
 import React from 'react'
-import CheckoutForm from '../Components/Checkout/CheckoutForm'
-import SummaryPanel from '../Components/Checkout/SummaryPanel'
+import CheckoutForm from '../../Components/MainPage/Checkout/CheckoutForm'
+import SummaryPanel from '../../Components/MainPage/Checkout/SummaryPanel'
 
 const CheckoutPage = () => {
   return (

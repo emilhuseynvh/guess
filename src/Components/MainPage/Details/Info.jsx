@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import birbank from './../../../public/assets/img/birbank.png'
-import zip from './../../../public/assets/img/zip.webp'
+import birbank from './../../../../public/assets/img/birbank.png'
+import zip from './../../../../public/assets/img/zip.webp'
 
 const details = {
     title: 'Eco beige treated flower jumper',

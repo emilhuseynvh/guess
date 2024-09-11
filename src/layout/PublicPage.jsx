@@ -1,6 +1,6 @@
 import React from 'react'
-import Header from '../Components/Header'
-import Footer from '../Components/Footer'
+import Header from '../Components/MainPage/Header'
+import Footer from '../Components/MainPage/Footer'
 import { Outlet } from 'react-router-dom'
 
 const PublicPage = () => {

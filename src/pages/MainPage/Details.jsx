@@ -1,6 +1,6 @@
 import React from 'react'
-import Img from '../Components/Details/Img'
-import Info from '../Components/Details/Info'
+import Img from '../../Components/MainPage/Details/Img'
+import Info from '../../Components/MainPage/Details/Info'
 
 
 const Details = () => {

@@ -27,8 +27,16 @@ const Header = ({ checkout }) => {
             <li className='py-[18px] mx-3 cursor-pointer tracking-[.2em]'>GUESS JEANS</li>
           </ul>
         </div>
+        {/* REGISTER LOGIN SECTION START */}
         <div className='flex'>
-          <p className={`${checkout ? 'hidden' : 'hidden base:block'} text-[.81rem] font-medium pr-4 mr-4 border-r-[1px] border-r-[#eee] select-none `}>Hi, <Link to='/login' className='font-normal underline cursor-pointer '>Sign-in or register</Link></p>
+          <div className='relative group'>
+            <p className={`${checkout ? 'hidden' : 'hidden base:block'} text-[.81rem] font-medium pr-4 mr-4 border-r-[1px] border-r-[#eee] select-none `}>Hi, <Link to={!localStorage.getItem('username') && '/login'} className='font-normal underline cursor-pointer'>{localStorage.getItem('username') ? localStorage.getItem('username') : 'Sign-in or register'}</Link></p>
+            <ul className={`${localStorage.getItem('username') && 'group-hover:block'} hidden absolute bg-white px-4 py-2 text-xs`}>
+              <li className='my-1 cursor-pointer hover:underline'>My Account</li>
+              <li onClick={() => {localStorage.removeItem('username'); location.reload() }} className='my-1 cursor-pointer hover:underline'>Sign-out</li>
+            </ul>
+          </div>
+          {/* REGISTER LOGIN SECTION END */}
           <svg aria-hidden="true" focusable="false" role="presentation" className={`${checkout ? 'hidden' : 'block'} mr-3 icon icon-pin icon--stroke-based cursor-pointer`} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z" stroke="black" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"></path><path d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z" stroke="black" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"></path></svg>
           <div className="md:relative">
             <div className={`${checkout ? 'hidden' : 'block'}`}>

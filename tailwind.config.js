@@ -14,7 +14,11 @@ export default {
       },
       colors: {
         grayCustom: '#707070',
-        lightGray: '#F6F6F6'
+        lightGray: '#F6F6F6',
+        dashboardSecondary: '#19191C',
+        dashboardPrimary: '#2D2D30',
+        dashboardBtn: '#5C67F7',
+        dashboardBorder: '#FFFFFF1A'
       },
     },
   },

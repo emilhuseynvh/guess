@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import BreadCrumbs from '../Components/BreadCrumbs';
-import FilterMenu from '../Components/Collection.jsx/FilterMenu';
-import Top from '../Components/Collection.jsx/Top';
-import Card from '../Components/Collection.jsx/Card';
-import TopMobile from '../Components/Collection.jsx/TopMobile';
+import BreadCrumbs from '../../Components/MainPage/BreadCrumbs';
+import FilterMenu from '../../Components/MainPage/Collection.jsx/FilterMenu';
+import Top from '../../Components/MainPage/Collection.jsx/Top';
+import Card from '../../Components/MainPage/Collection.jsx/Card';
+import TopMobile from '../../Components/MainPage/Collection.jsx/TopMobile';
 
 const Collection = () => {
-  // Get grid value from localStorage or default to 4
+
   const localGrid = localStorage.getItem('grid');
   const [grid, setGrid] = useState(localGrid ? Number(localGrid) : 4);
 
-  // Update localStorage whenever grid value changes
+
   useEffect(() => {
     localStorage.setItem('grid', grid);
   }, [grid]);

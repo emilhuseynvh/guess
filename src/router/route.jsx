@@ -1,18 +1,24 @@
 import { createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom";
-import Home from "../pages/Home";
+import Home from "../pages/MainPage/Home";
 import PublicPage from "../layout/PublicPage";
-import Collection from "../pages/Collection";
-import Cart from "../pages/Cart";
-import Details from "../pages/Details";
-import Login from "../pages/Login";
-import Register from "../pages/Register";
+import Collection from "../pages/MainPage/Collection";
+import Cart from "../pages/MainPage/Cart";
+import Details from "../pages/MainPage/Details";
+import Login from "../pages/MainPage/Login";
+import Register from "../pages/MainPage/Register";
 import Checkout from "../layout/Checkout";
-import CheckoutPage from '../pages/CheckoutPage'
+import CheckoutPage from '../pages/MainPage/CheckoutPage'
+import DashboardLogin from "../pages/Dashboard/DashboardLogin";
+import Auth from "./Auth";
+import AdminLayout from "../layout/AdminLayout";
+import DashboardProduct from "../pages/Dashboard/DashboardProduct";
+import DashboardCategory from "../pages/Dashboard/DashboardCategory";
+import DashboardBrand from "../pages/Dashboard/DashboardBrand";
 
 export const route = createBrowserRouter(
     createRoutesFromElements(
         <>
-            <Route  path="/" element={<PublicPage />} >
+            <Route path="/" element={<PublicPage />} >
                 <Route index path="/" element={<Home />} />
                 <Route path="/collection" element={<Collection />} />
                 <Route path="collection/details" element={<Details />} />
@@ -20,8 +26,13 @@ export const route = createBrowserRouter(
                 <Route index path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
             </Route>
-            <Route  path="/checkout" element={<Checkout />}>
-                <Route index path="/checkout"  element={<CheckoutPage />} />
+            <Route path="/checkout" element={<Checkout />}>
+                <Route index path="/checkout" element={<CheckoutPage />} />
+            </Route>
+            <Route path="dashboard" element={<Auth><AdminLayout /></Auth>}>
+                <Route index element={<DashboardProduct />} />
+                <Route path="category" element={<DashboardCategory />} />
+                <Route path="brand" element={<DashboardBrand />} />
             </Route>
         </>
     )

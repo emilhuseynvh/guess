@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import Checkbox from '../Components/Checkbox';
+import Checkbox from '../../Components/MainPage/Checkbox';
 
 const input = [
   {

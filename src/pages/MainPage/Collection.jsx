@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import BreadCrumbs from '../../Components/MainPage/BreadCrumbs';
-import FilterMenu from '../../Components/MainPage/Collection.jsx/FilterMenu';
-import Top from '../../Components/MainPage/Collection.jsx/Top';
-import Card from '../../Components/MainPage/Collection.jsx/Card';
-import TopMobile from '../../Components/MainPage/Collection.jsx/TopMobile';
+import FilterMenu from '../../Components/MainPage/Collection/FilterMenu';
+import Top from '../../Components/MainPage/Collection/Top';
+import Card from '../../Components/MainPage/Collection/Card';
+import TopMobile from '../../Components/MainPage/Collection/TopMobile';
 
 const Collection = () => {
 

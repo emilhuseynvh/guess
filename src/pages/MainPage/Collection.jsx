@@ -8,7 +8,7 @@ import TopMobile from '../../Components/MainPage/Collection/TopMobile';
 const Collection = () => {
 
   const localGrid = localStorage.getItem('grid');
-  const [grid, setGrid] = useState(localGrid ? Number(localGrid) : 4);
+  const [grid, setGrid] = useState(localGrid ? Number(localGrid) : 4)
 
 
   useEffect(() => {

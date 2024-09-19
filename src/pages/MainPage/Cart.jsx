@@ -3,55 +3,26 @@ import CartElement from '../../Components/MainPage/Cart/CartElement'
 import MiniCartElement from '../../Components/MainPage/Cart/MiniCartElement'
 import CartBottom from '../../Components/MainPage/Cart/CartBottom'
 import BreadCrumbs from '../../Components/MainPage/BreadCrumbs'
+import { useGetCartQuery } from '../../redux/api'
 
-const product = [
-    {
-        img: 'https://guess.com.au/cdn/shop/files/M4GQ14KC6V1_DREAMY-MOON_V1.jpg?v=1721191714',
-        title: 'Eco beige treated flower jumper',
-        price: '$116.95',
-        total: '$129.95'
-    },
-    {
-        img: 'https://guess.com.au/cdn/shop/files/M4GQ14KC6V1_DREAMY-MOON_V1.jpg?v=1721191714',
-        title: 'Eco beige treated flower jumper',
-        price: '$116.95',
-        total: '$129.95'
-    },
-    {
-        img: 'https://guess.com.au/cdn/shop/files/M4GQ14KC6V1_DREAMY-MOON_V1.jpg?v=1721191714',
-        title: 'Eco beige treated flower jumper',
-        price: '$116.95',
-        total: '$129.95'
-    },
-    {
-        img: 'https://guess.com.au/cdn/shop/files/M4GQ14KC6V1_DREAMY-MOON_V1.jpg?v=1721191714',
-        title: 'Eco beige treated flower jumper',
-        price: '$116.95',
-        total: '$129.95'
-    },
-    {
-        img: 'https://guess.com.au/cdn/shop/files/M4GQ14KC6V1_DREAMY-MOON_V1.jpg?v=1721191714',
-        title: 'Eco beige treated flower jumper',
-        price: '$116.95',
-        total: '$129.95'
-    },
-]
 
 const Cart = () => {
+
+    const { data: products, error, isLoading } = useGetCartQuery();
     return (
         <div className='w-[95%] mx-auto'>
             <div className='mt-6 mb-8'>
                 <BreadCrumbs />
             </div>
-            <p className='font-semibold text-sm mb-4'>Cart ({product.length} items)</p>
+            <p className='font-semibold text-sm mb-4'>Cart ({products?.length} items)</p>
             <div className='lg:flex justify-between'>
                 <div className='w-full lg:w-[60%]'>
-                    {product.map((item, i) => {
+                    {products?.map((item, i) => {
                         return (
-                            <>
-                                <div className='md:block hidden'><CartElement key={i} item={item} /></div>
-                                <div className='md:hidden block'><MiniCartElement key={i} item={item} /></div>
-                            </>
+                            <div key={i}>
+                                <div className='md:block hidden'><CartElement item={item} /></div>
+                                <div className='md:hidden block'><MiniCartElement item={item} /></div>
+                            </div>
 
                         )
                     })}

@@ -28,7 +28,7 @@ const FilterMenu = () => {
 
     return (
         <div className='pr-4'>
-            {filter.map((item, i) => <div><AccardionItem i={i} key={i} item={item} /></div>)}
+            {filter.map((item, i) => <div key={i}><AccardionItem i={i} key={i} item={item} /></div>)}
         </div>
     )
 }

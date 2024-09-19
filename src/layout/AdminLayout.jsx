@@ -1,8 +1,8 @@
 import React from 'react'
-import Sidebar from '../pages/Dashboard/Sidebar'
 import { Outlet } from 'react-router-dom'
-import DashboardHeader from '../Components/Dashboard/DashBoardHeader'
+import DashboardHeader from '../Components/Dashboard/DashboardHeader'
 import { Toaster } from 'react-hot-toast'
+import Sidebar from '../Components/Dashboard/Sidebar'
 
 const AdminLayout = () => {
   return (

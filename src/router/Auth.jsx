@@ -3,12 +3,13 @@ import DashboardLogin from '../pages/Dashboard/DashboardLogin'
 
 
 function Auth({ children }) {
-    
-    const token = localStorage.getItem('token')
+
+  const role = localStorage.getItem('role')
+  const token = localStorage.getItem('token')
 
   return (
     <>
-    {token ? children : <DashboardLogin />}
+      {token && role === 'ADMIN' ? children : <DashboardLogin />}
     </>
   )
 }

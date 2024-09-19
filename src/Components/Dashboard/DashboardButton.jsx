@@ -1,12 +1,9 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
-const DashboardButton = ({ name }) => {
-    return (
-        <div className='w-full flex justify-end'>
-            <Link className='bg-dashboardBtn hover:bg-[#5C67F7E6] duration-100 py-[.375rem] px-3 rounded-[4px] text-sm'>{name}</Link>
-        </div>
-    )
+const BrandButton = ({ name }) => {
+  return (
+    <button className='w-full bg-dashboardBtn hover:bg-[#5C67F7E6] duration-100 py-[.5rem] px-3 rounded-[4px] text-sm'>{name}</button>
+  )
 }
 
-export default DashboardButton
+export default BrandButton

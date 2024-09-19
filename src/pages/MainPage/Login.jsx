@@ -8,7 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 
 const validationSchema = Yup.object({
-  username: Yup.string().min(5, 'Username must be at least 5 characters').required('Username is required'),
+  username: Yup.string().min(4, 'Username must be at least 4 characters').required('Username is required'),
   password: Yup.string().required('Password is required')
 });
 
@@ -16,9 +16,12 @@ const Login = () => {
   const navigate = useNavigate()
 
   function handleLoginResponse(response, values) {
+    console.log(response);
+    
     if (response.data) {
       localStorage.setItem('username', values.username)
       localStorage.setItem('token', response.data.token)
+      localStorage.setItem('user', JSON.stringify(response.data.user))
       navigate('/')
     }
     else {
@@ -26,7 +29,9 @@ const Login = () => {
     }
   }
 
-  const [userLogin] = useLoginMutation();
+  const [userLogin, {data, error}] = useLoginMutation();
+  console.log(data, error);
+  
   const notify = (arg) => toast.error(arg);
 
   return (
@@ -60,10 +65,11 @@ const Login = () => {
               <Input name='password' type='password' label='Enter your password*' />
               <ErrorMessage name='password' component='div' className='text-red-600' />
             </div>
+            <Link to='/' className='underline text-sm'>Forgot your password?</Link>
             <button type="submit" className='border-2 border-black py-3 w-full my-5'>Login</button>
+            <Link to='/register' className='underline text-sm mt-4'>Click to sign up</Link>
             <ToastContainer />
             <div className='mt-4'>
-              <Link to='/forgot-password' className='text-blue-500'>Forgot your password?</Link>
             </div>
           </Form>
         </Formik>

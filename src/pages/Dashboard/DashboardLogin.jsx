@@ -15,8 +15,9 @@ const DashboardLogin = () => {
     const navigate = useNavigate()
 
     function handleNavigate(response) {
-        if (response.data) {
+        if (response.data.user.role === 'ADMIN') {
             localStorage.setItem('token', response.data.token)
+            localStorage.setItem('role', response.data.user.role)
             navigate('/dashboard')
             location.reload()
         }
@@ -26,6 +27,8 @@ const DashboardLogin = () => {
     }
 
     const [adminLogin, { data }] = useLoginMutation()
+    console.log(data);
+
 
     const notify = (arg) => toast.error(arg);
 

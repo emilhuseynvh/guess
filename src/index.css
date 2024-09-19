@@ -117,3 +117,15 @@ span {
 #category-table td{
     border: none !important;
 }
+
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.select:focus{
+    border-color: #FFFFFF1A !important;
+    background-color: rgb(25 25 28 ) !important;
+}

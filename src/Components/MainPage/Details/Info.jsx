@@ -1,31 +1,27 @@
 import React, { useState } from 'react'
 import birbank from './../../../../public/assets/img/birbank.png'
 import zip from './../../../../public/assets/img/zip.webp'
+import { useAddToCartMutation } from '../../../redux/api'
 
-const details = {
-    title: 'Eco beige treated flower jumper',
-    img: [
-        'https://guess.com.au/cdn/shop/files/M4GQ14KC6V1_DREAMY-MOON_V1.jpg?v=1721191714&width=1100',
-        'https://guess.com.au/cdn/shop/files/M4GQ14KC6V1_DREAMY-MOON_V4.jpg?v=1721191714&width=1100',
-        'https://guess.com.au/cdn/shop/files/M4GQ14KC6V1_DREAMY-MOON_V2.jpg?v=1721191715&width=1100',
-        'https://guess.com.au/cdn/shop/files/M4GQ14KC6V1_DREAMY-MOON_V5.jpg?v=1721191715&width=1100',
-        'https://guess.com.au/cdn/shop/files/M4GQ14KC6V1_DREAMY-MOON_V3.jpg?v=1721191714&width=1100'
-    ],
-    desc: 'Get cosy and eco-friendly with our Eco Beige Treated Flower Jumper. Made from 100% cotton, this crew-neck jumper features long sleeves and a playful logo detail. Stay stylish while being kind',
-    price: '$ 129.95',
-    size: ['XS', 'S', 'M', 'L', 'XL', '2XL'],
-    quant: ['1', '2', '3']
+const Info = ({ product }) => {
+    const { id, price, name, description, Size } = product
+    console.log(id);
 
-}
+    const [quant, setQuant] = useState(1)
 
-const Info = () => {
-    const { price, title, desc, quant, size } = details
+    const [addToCart, { data, error }] = useAddToCartMutation()
+    console.log(data, error);
+
+    const handleClick = () => {
+        addToCart({ productId: id, count: quant });
+    }
+
 
     const [info, setInfo] = useState(1)
 
     return (
         <div className='md:mt-0 mt-12 sticky h-screen top-2'>
-            <p className='text-sm font-semibold'>{title}</p>
+            <p className='text-sm font-semibold'>{name}</p>
             <p className='mt-2 text-sm font-medium'>{price}</p>
             <div className='flex gap-4 items-center border-t border-b border-[#d8d8d8] py-3 justify-evenly'>
                 <div className='px-3 flex flex-col items-center gap-2'>
@@ -44,20 +40,22 @@ const Info = () => {
             <div className='flex py-4 border-b border-[#eee] mb-4'>
                 <p>Size:</p>
                 <select className='w-4/5 text-base outline-none mx-auto'>
-                    {details.size.map((item, i) => {
-                        return <option>{item}</option>
+                    {product.Size.map((item, i) => {
+                        return <option key={i} >{item}</option>
                     })}
                 </select>
             </div>
             <div className='flex py-4 border-b border-[#eee] mb-4'>
                 <p>Qty:</p>
-                <select className='w-4/5 text-base outline-none mx-auto'>
-                    {details.quant.map((item, i) => {
-                        return <option>{item}</option>
-                    })}
+                <select onChange={(e) => setQuant(e.target.value)} className='w-4/5 text-base outline-none mx-auto'>
+                    <option value='1'>1</option>
+                    <option value='2'>2</option>
+                    <option value='3'>3</option>
+                    <option value='4'>4</option>
+                    <option value='5'>5</option>
                 </select>
             </div>
-            <button className='text-white bg-black w-full py-4 mt-2'>Add to bag</button>
+            <button onClick={() => handleClick()} className='text-white bg-black w-full py-4 mt-2'>Add to bag</button>
             <div className='flex mt-5 mb-[15px] items-center justify-between'>
                 <div className='flex items-center'>
                     <svg aria-hidden="true" focusable="false" role="presentation" className="icon icon-heart icon--stroke-based w-6 h-6" data-modal-type="show-list-selection" data-variant-id="39975283261512" data-product-id="6770022023240" data-product-url="https://guess.com.au/products/eco-beige-treated-flower-jumper-m4gq14kc6v1" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.0057 19.5216L4.36699 12.6025C0.21554 8.45103 6.31817 0.48025 12.0057 6.92884C17.6931 0.48025 23.7681 8.47871 19.6443 12.6025L12.0057 19.5216Z" stroke="black" strokeWidth="1.71429" strokeLinecap="round" strokeLinejoin="round" className="" data-modal-type="show-list-selection" data-variant-id="39975283261512" data-product-id="6770022023240" data-product-url="https://guess.com.au/products/eco-beige-treated-flower-jumper-m4gq14kc6v1"></path></svg>
@@ -74,7 +72,7 @@ const Info = () => {
                 <p onClick={() => setInfo(2)} className={`py-2 border-b-2 ${info === 2 ? 'border-black text-black' : 'border-transparent text-[#bfbfbf]'} font-medium cursor-pointer`}>Shipping and returns</p>
             </div>
             <div className={`${info === 1 ? 'block' : 'hidden'}`}>
-                <p className='text-sm font-medium'>{desc}</p>
+                <p className='text-sm font-medium'>{description}</p>
             </div>
             <div className={`${info === 2 ? 'block' : 'hidden'}`}>
                 <div>

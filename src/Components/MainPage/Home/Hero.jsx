@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const Hero = () => {
     return (
-        <div>
+        <div className='select-none'>
             <div className='mb-2'>
                 <img className='md:block hidden' src="assets/img/ads_desktop.avif" alt="Ads" />
                 <img className='md:hidden block' src="assets/img/ads_mobile.avif" alt="Ads" />

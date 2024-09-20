@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const CheckBox = ({ checkbox, setCheckbox }) => {
+const CheckBox = ({ checkbox, setCheckbox, checkParent, setCheckParent }) => {
 
     const [check, setCheck] = useState(false)
 

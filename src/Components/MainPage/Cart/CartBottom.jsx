@@ -10,12 +10,10 @@ const CartBottom = ({ bl, setCart, cart }) => {
     
 
     const { data: products, error, isLoading } = useGetCartQuery();
-    console.log(products);
     
 
     products?.forEach(element => {
        total += element.product_id.price * element.count  
-       console.log(total);
            
     });
 

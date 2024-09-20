@@ -6,8 +6,6 @@ import { useGetCartQuery } from '../../../redux/api';
 
 const MiniCart = ({ cart, setCart }) => {
   const { data: products, error, isLoading } = useGetCartQuery();
-  
-  console.log(products);
 
 
   return (

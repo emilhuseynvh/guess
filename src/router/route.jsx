@@ -14,17 +14,19 @@ import AdminLayout from "../layout/AdminLayout";
 import DashboardProduct from "../pages/Dashboard/DashboardProduct";
 import DashboardCategory from "../pages/Dashboard/DashboardCategory";
 import DashboardBrand from "../pages/Dashboard/DashboardBrand";
+import Account from "../pages/MainPage/Account";
 
 export const route = createBrowserRouter(
     createRoutesFromElements(
         <>
             <Route path="/" element={<PublicPage />} >
                 <Route index path="/" element={<Home />} />
-                <Route path="/collection" element={<Collection />} />
-                <Route path="collection/details" element={<Details />} />
+                <Route path="/products/all" element={<Collection />} />
+                <Route path="/products/all/details" element={<Details />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route index path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/account" element={<Account />} />
             </Route>
             <Route path="/checkout" element={<Checkout />}>
                 <Route index path="/checkout" element={<CheckoutPage />} />

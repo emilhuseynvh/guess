@@ -209,23 +209,9 @@ export const guessApi = createApi({
             invalidatesTags: ['Products'],
         }),
         searchProducts: builder.query({
-            query: ({ page, limit, sortBy, sortOrder, categoryId, subcategoryId, brandId, color, size, minPrice, maxPrice, discount }) => ({
-                url: '/products/search',
-                params: {
-                    page: page || 1,
-                    limit: limit || 10,
-                    sortBy: sortBy || 'price',
-                    sortOrder: sortOrder || 'asc',
-                    categoryId: categoryId || null,
-                    subcategoryId: subcategoryId || null,
-                    brandId: brandId || null,
-                    color: color || [],
-                    size: size || [],
-                    minPrice: minPrice || 0,
-                    maxPrice: maxPrice || 10000,
-                    discount: discount || false
-                }
-            })
+            query: (params) => ({
+                url: `/products/all?${params}`
+            }),
         }),
         getProductBySubcategoryId: builder.mutation({
             query: (subcategoryId) => ({
@@ -289,8 +275,19 @@ export const guessApi = createApi({
                 body: ({ productId, count })
             }),
             invalidatesTags: ['Cart']
-        })
-    })
+        }),
+        updateUser: builder.mutation({
+            query: (userData) => ({
+                url: '/user/update',
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: userData,
+            }),
+        }),
+    }),
 })
 
 export const {
@@ -320,5 +317,6 @@ export const {
     useAddToCartMutation,
     useGetCartQuery,
     useDeleteFromCartMutation,
-    useCartChangeMutation
+    useCartChangeMutation,
+    useUpdateUserMutation
 } = guessApi

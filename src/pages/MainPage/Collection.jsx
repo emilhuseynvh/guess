@@ -1,33 +1,25 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom'; // useLocation hook
 import BreadCrumbs from '../../Components/MainPage/BreadCrumbs';
 import FilterMenu from '../../Components/MainPage/Collection/FilterMenu';
 import Top from '../../Components/MainPage/Collection/Top';
 import Card from '../../Components/MainPage/Collection/Card';
 import TopMobile from '../../Components/MainPage/Collection/TopMobile';
-import { useSelector } from 'react-redux';
-import { useGetAllProductQuery, useGetProductBySubcategoryIdMutation, useSearchProductsQuery } from '../../redux/api';
-import { selectChangedFilters } from '../../redux/productFilterSlice';
+import { useSearchProductsQuery } from '../../redux/api';
 
 const Collection = () => {
-
+  const location = useLocation(); 
   const localGrid = localStorage.getItem('grid');
   const [grid, setGrid] = useState(localGrid ? Number(localGrid) : 4);
-  const [filters, setFilters] = useState(null);
-  const [filteredProduct, setFilteredProduct] = useState([]);
+  const [params, setParams] = useState(null);
 
-  // const { productFilter } = useSelector((state) => state)
-  // console.log(productFilter.subcategoryId);
-  // const {data:allProduct, error} = useGetAllProductQuery()
-  // console.log(allProduct, error);  
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const fullQuery = searchParams.toString();
+    setParams(fullQuery);
+  }, [location]);
 
-  // useEffect(() => {
-  //   if (data) {
-  //    const filteredProduct =  allProduct?.filter(item => item.id === productFilter.subcategoryId)
-  //   }
-  // }, []);
-  const {data} = useGetAllProductQuery()
-  console.log(data);
-  
+  const { data, error: searchError } = useSearchProductsQuery(params);
 
   useEffect(() => {
     localStorage.setItem('grid', grid);
@@ -40,13 +32,13 @@ const Collection = () => {
       <TopMobile />
       <div className='flex'>
         <div className='w-1/5 lg:block hidden'>
-          <FilterMenu />
+          <FilterMenu  />
         </div>
         <div className={`lg:w-4/5 w-full gap-4 grid grid-cols-${grid}`}>
           {!data ? (
-            <p>Loading...</p> // Placeholder while data is loading
+            <p>Yüklənir...</p> 
           ) : (
-            data.data?.map((item, i) => (
+            data?.data?.map((item, i) => (
               <div key={i}>
                 <Card item={item} />
               </div>
@@ -56,8 +48,6 @@ const Collection = () => {
       </div>
     </div>
   );
-  
 };
 
 export default Collection;
-

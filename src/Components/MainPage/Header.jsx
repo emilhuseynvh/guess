@@ -5,11 +5,8 @@ import { IoSearch } from "react-icons/io5";
 import MiniCart from './Cart/MiniCart';
 import { useGetAllCategoriesQuery, useGetCartQuery, useGetProductBySubcategoryIdMutation, useSearchProductsQuery } from '../../redux/api';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSubCategoryFilter } from '../../redux/subCategoryFilterSlice';
-import { setFilters } from '../../redux/productFilterSlice';
 import HamburgerMenu from './HamburgerMenu';
 import { MdClose } from 'react-icons/md';
-import { setSubcategoryId } from '../../redux/categoryIdSlice';
 
 const Header = ({ checkout }) => {
 
@@ -18,22 +15,17 @@ const Header = ({ checkout }) => {
   const [cart, setCart] = useState(false)
   const [showHamburger, setShowHamburger] = useState(false)
 
-  const dispatch = useDispatch()
-  const subcategoryId = useSelector(state => state.subcategory);
-  
+  const navigate = useNavigate();
 
-
-  const navigate = useNavigate()
-
-
-
-  const { data: allCategories } = useGetAllCategoriesQuery()
+  const { data: allCategories } = useGetAllCategoriesQuery();
   const { data: products, error, isLoading } = useGetCartQuery();
 
   const handleFilter = (id) => {
-    dispatch(setFilters({subcategoryId: id}));
-    navigate('/collection')
+    navigate({ pathname: '/products/all', search: `?subcategoryId=${id}`,})
   };
+
+
+
 
   const handleClick = () => {
     const token = localStorage.getItem('token')
@@ -66,8 +58,8 @@ const Header = ({ checkout }) => {
         <div className='flex'>
           <div className='relative group'>
             <p className={`${checkout ? 'hidden' : 'hidden base:block'} text-[.81rem] font-medium pr-4 mr-4 border-r-[1px] border-r-[#eee] select-none `}>Hi, <Link to={!localStorage.getItem('username') && '/login'} className='font-normal underline cursor-pointer'>{localStorage.getItem('username') ? localStorage.getItem('username') : 'Sign-in or register'}</Link></p>
-            <ul className={`${localStorage.getItem('username') && 'group-hover:block'} hidden absolute bg-white px-4 py-2 text-xs`}>
-              <li className='my-1 cursor-pointer hover:underline'>My Account</li>
+            <ul className={`${localStorage.getItem('username') && 'group-hover:block'} hidden absolute bg-white px-4 z-10 py-2 text-xs`}>
+              <li onClick={() => navigate('/account')} className='my-1 cursor-pointer hover:underline'>My Account</li>
               <li onClick={() => { localStorage.removeItem('username'); localStorage.removeItem('token'); location.reload() }} className='my-1 cursor-pointer hover:underline'>Sign-out</li>
             </ul>
           </div>

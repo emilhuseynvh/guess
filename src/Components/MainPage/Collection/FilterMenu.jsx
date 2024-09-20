@@ -1,36 +1,51 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import AccardionItem from './AccardionItem';
-
-const filter = [
-    {
-        title: 'Color',
-        element: ['green', 'white', 'black', 'red']
-    },
-    {
-        title: 'Brands',
-        element: ['AMIRI', 'Balenciaga', 'Moncler', 'Givenchy']
-    },
-    {
-        title: 'Discount',
-        element: ['Discount', 'without discount']
-    },
-    {
-        title: 'Size',
-        element: ['XS', 'S', 'M', 'L', 'Xl', 'XXlL']
-    },
-    {
-        title: 'Price',
-        element: [null]
-    }
-]
+import { eSize, eColor } from './../../../enum/enumData';
+import { useGetAllBrandsQuery } from '../../../redux/api';
+import { useNavigate } from 'react-router-dom';
 
 const FilterMenu = () => {
+    const navigate = useNavigate();
+    const { data: allBrand, isLoading, isError } = useGetAllBrandsQuery();
+
+    const filter = [
+        {
+            title: 'Brand',
+            element: allBrand && allBrand.length > 0 ? allBrand.map(brand => brand.name) : []
+        },
+        {
+            title: 'Color',
+            element: eColor
+        },
+        {
+            title: 'Size',
+            element: eSize
+        },
+        {
+            title: 'Discount',
+            element: ['Discount']
+        },
+        {
+            title: 'Price',
+        }
+    ];
+
+    if (isLoading) return <p>Loading brands...</p>;
+
+
 
     return (
         <div className='pr-4'>
-            {filter.map((item, i) => <div key={i}><AccardionItem i={i} key={i} item={item} /></div>)}
+            {filter.map((item, i) => (
+                <div key={i}>
+                    <AccardionItem 
+                        i={i} 
+                        item={item} 
+                    />
+                </div>
+            ))}
         </div>
-    )
-}
+    );
+};
 
-export default FilterMenu
+export default FilterMenu;

@@ -8,12 +8,18 @@ const Info = ({ product }) => {
     console.log(id);
 
     const [quant, setQuant] = useState(1)
+    const [color, setColor] = useState(product?.Colors[0])
+    const [size, setSize] = useState(product?.Size[0])
+    console.log(size);
+    
+    console.log(color);
+    
 
     const [addToCart, { data, error }] = useAddToCartMutation()
     console.log(data, error);
 
     const handleClick = () => {
-        addToCart({ productId: id, count: quant });
+        addToCart({ productId: id, count: quant, color, size });
     }
 
 
@@ -39,7 +45,7 @@ const Info = ({ product }) => {
             </div>
             <div className='flex py-4 border-b border-[#eee] mb-4'>
                 <p>Size:</p>
-                <select className='w-4/5 text-base outline-none mx-auto'>
+                <select onChange={(e) => setSize(e.target.value)} className='w-4/5 text-base outline-none mx-auto'>
                     {product.Size.map((item, i) => {
                         return <option key={i} >{item}</option>
                     })}
@@ -53,6 +59,14 @@ const Info = ({ product }) => {
                     <option value='3'>3</option>
                     <option value='4'>4</option>
                     <option value='5'>5</option>
+                </select>
+            </div>
+            <div className='flex py-4 border-b border-[#eee] mb-4'>
+                <p>Color:</p>
+                <select onChange={(e) => setColor(e.target.value)} className='w-4/5 text-base outline-none mx-auto'>
+                    {product.Colors.map((item, i) => {
+                        return <option key={i} value={item} className='flex gap-2'>{item}</option>
+                    })}
                 </select>
             </div>
             <button onClick={() => handleClick()} className='text-white bg-black w-full py-4 mt-2'>Add to bag</button>

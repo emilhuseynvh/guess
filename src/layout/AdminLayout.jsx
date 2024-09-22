@@ -6,7 +6,7 @@ import Sidebar from '../Components/Dashboard/Sidebar'
 
 const AdminLayout = () => {
   return (
-    <div id='dashboard'>
+    <div id='dashboard' className='overflow-y-hidden h-screen'>
       <Toaster position="top-center" reverseOrder={false} />
       <DashboardHeader />
       <div className='flex w-screen'>

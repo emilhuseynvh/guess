@@ -8,46 +8,79 @@ const AccardionItem = ({ item, i }) => {
     const navigate = useNavigate()
 
 
-    const [size, setSize] = useState([]);
-    const [color, setColor] = useState([]);
-    const [brand, setBrand] = useState('');
-
-    useEffect(() => {
-        const queryParams = new URLSearchParams(window.location.search);
-    
-        if (size.length > 0) {
-            queryParams.set('size', size.join(','));
-        }
-    
-        if (color.length > 0) {
-            queryParams.set('color', color.join(','));
-        }
-    
-        if (brand) {
-            queryParams.set('brand', brand);
-        }
-    
-        navigate({
-            pathname: '/products/all',
-            search: `?${queryParams.toString()}`,
-        });
-    }, [size, color, brand]);
-    
-
-
     const { title, element } = item;
 
     const [checkParent, setCheckParent] = useState(false);
     const [accardion, setAccardion] = useState(false);
 
+    const [size, setSize] = useState([]);
+    const [color, setColor] = useState([]);
+    const [discount, setDiscount] = useState(false);
+    const [brand, setBrand] = useState('');
+    const [sliderValue, setSliderValue] = useState([30, 500]);
+    console.log(discount);
+
+
+
+    useEffect(() => {
+        const queryParams = new URLSearchParams(window.location.search);
+
+        if (size.length > 0) {
+            queryParams.set('size', size.join(','));
+        } else {
+            queryParams.delete('size');
+        }
+
+        if (color.length > 0) {
+            queryParams.set('color', color.join(','));
+        } else {
+            queryParams.delete('color');
+        }
+
+        navigate({
+            pathname: '/products/all',
+            search: `?${queryParams.toString()}`,
+        });
+    }, [size, color, brand]);
+
+    useEffect(() => {
+        const queryParams = new URLSearchParams(window.location.search);
+
+        if (sliderValue[0] === 30 && sliderValue[1] === 500) {
+            queryParams.delete('minPrice');
+            queryParams.delete('maxPrice');
+        } else {
+            queryParams.set('minPrice', sliderValue[0]);
+            queryParams.set('maxPrice', sliderValue[1]);
+        }
+
+        navigate({
+            pathname: '/products/all',
+            search: `?${queryParams.toString()}`,
+        });
+    }, [sliderValue]);
+
+    useEffect(() => {
+        const queryParams = new URLSearchParams(window.location.search);
+
+        if (discount) {
+            queryParams.set('discount', 'true');
+        } else {
+            queryParams.delete('discount');
+        }
+
+        navigate({
+            pathname: '/products/all',
+            search: `?${queryParams.toString()}`,
+        });
+    }, [discount, navigate]);
+
+
+
+
+
     const toggleFunc = (list) => {
-        if (title === 'Brand') {
-            if (brand === list) {
-                setBrand('');
-            } else {
-                setBrand(list);
-            }
-        } else if (title === 'Color') {
+        if (title === 'Color') {
             if (color.includes(list)) {
                 const newColor = color.filter(item => item !== list);
                 setColor(newColor);
@@ -63,16 +96,6 @@ const AccardionItem = ({ item, i }) => {
             }
         }
     };
-    
-
-    const alwaysRenderCheckBox = () => {
-        if (i !== 1 && title !== 'Price') {
-            return (
-                <CheckBox checkParent={checkParent} setCheckParent={setCheckParent} title={title} />
-            );
-        }
-        return null;
-    };
 
     return (
         <div className='filter border-b-[1px] border-b-[#979797] py-4 pr-1 overflow-hidden duration-300'>
@@ -82,19 +105,17 @@ const AccardionItem = ({ item, i }) => {
             </div>
             <ul style={{ maxHeight: accardion ? '500px' : '0', transition: 'max-height 0.5s ease' }} className="pl-3 text-xs font-medium overflow-hidden">
                 {element?.map((list, index) => (
-                    <React.Fragment key={index}>
-                        <div className={`${title === 'Price' ? 'hidden' : 'flex'} my-2`} onClick={() => toggleFunc(list)}>
-                            {alwaysRenderCheckBox()}
-                            {i === 1 && (
-                                <div style={{ background: `${list}`, borderColor: `${list === 'WHITE' ? 'black' : list}` }} className="border border-black w-5 h-5 rounded-[50%]"></div>
-                            )}
-                            <li className='cursor-pointer pb-1 ml-2 select-none'>{list}</li>
+                    <div key={index} className={`${title === 'Price' ? 'hidden' : 'flex'} my-2`} onClick={() => title === 'Discount' ? setDiscount(!discount) : toggleFunc(list)}>
+                        <div className={title !== 'Color' ? 'block' : 'hidden'}>
+                            <CheckBox checkParent={checkParent} setCheckParent={setCheckParent} title={title} />
                         </div>
-                    </React.Fragment>
+                        <div style={{ background: `${list}`, borderColor: `${list === 'WHITE' ? 'black' : list}` }} className={`${title === 'Color' ? 'block' : 'hidden'} border border-black w-5 h-5 rounded-[50%]`}></div>
+                        <li className='cursor-pointer pb-1 ml-2 select-none'>{list}</li>
+                    </div>
                 ))}
                 {title === 'Price' && (
                     <div className="mr-5">
-                        <InputSlider />
+                        <InputSlider value={sliderValue} setValue={setSliderValue} />
                     </div>
                 )}
             </ul>

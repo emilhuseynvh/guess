@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Slider from '@mui/material/Slider';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -13,8 +13,9 @@ const CustomTextField = styled(TextField)({
     },
 });
 
-const InputSlider = () => {
-    const [value, setValue] = useState([30, 500]);
+const InputSlider = ({ value, setValue }) => {
+    console.log(value);
+    
 
     const handleChange = (event, newValue) => {
         setValue(newValue);

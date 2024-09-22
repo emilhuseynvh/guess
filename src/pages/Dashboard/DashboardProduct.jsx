@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import DashboardTable from '../../Components/Dashboard/DashboardProduct/DashboardProductTable'
 import DashboardButton from '../../Components/Dashboard/DashboardButton'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCreateProduct } from '../../redux/createProductSlice'
 import ProductModal from '../../Components/Dashboard/DashboardProduct/CreateProduct'
-import { useGetAllProductQuery } from '../../redux/api'
+import { useGetAllProductQuery, useSearchProductByInputMutation } from '../../redux/api'
 import CreateProduct from '../../Components/Dashboard/DashboardProduct/CreateProduct'
 import UpdateProduct from '../../Components/Dashboard/DashboardProduct/UpdateProduct'
 import BrandButton from '../../Components/Dashboard/DashboardButton'
@@ -13,12 +13,20 @@ import BrandButton from '../../Components/Dashboard/DashboardButton'
 const DashboardProduct = () => {
   const dispatch = useDispatch()
   const { productUpdate } = useSelector((state) => state.productUpdate);
+  const [input, setInput] = useState('')
 
 
 
   const { data: allProducts, error } = useGetAllProductQuery()
-  
+  const [inputValue, { data: searchData, error: searchError }] = useSearchProductByInputMutation()
+  console.log(searchData, searchError);
 
+  useEffect(() => {
+    input && inputValue(input)
+  }, [input])
+
+
+  console.log('salam');
 
 
   return (
@@ -32,7 +40,7 @@ const DashboardProduct = () => {
         <div className='h-[550px] overflow-y-auto scroll'>
           <div className='w-full pt-4 pb-2 pr-4 pl-4 flex justify-between'>
             <p className='text-base font-medium'>Added Products</p>
-            <input style={{ transition: 'border-color .15s ease-in-out, box-shadow .15s ease-in-out' }} className='focus:border-dashboardBtn outline-none bg-transparent border border-dashboardBorder text-[.8rem] py-1 px-[.8rem] rounded' placeholder='Search' type="text" />
+            <input onChange={(e) => setInput(e.target.value)} style={{ transition: 'border-color .15s ease-in-out, box-shadow .15s ease-in-out' }} className='focus:border-dashboardBtn outline-none bg-transparent border border-dashboardBorder text-[.8rem] py-1 px-[.8rem] rounded' placeholder='Search' type="text" />
           </div>
           <table id='product-table' className='border border-dashboardBorder w-full mt-4'>
             <thead>
@@ -47,7 +55,16 @@ const DashboardProduct = () => {
                 <th>Actions</th>
               </tr>
             </thead>
-            {allProducts && allProducts.data.map((item, i) => <DashboardTable key={i} item={item} />)}
+            {searchData ? (
+              searchData.length > 0 ? (
+                searchData.map((item, i) => <DashboardTable key={i} item={item} />)
+              ) : (
+                <p>Not found</p>
+              )
+            ) : (
+              allProducts?.data?.map((item, i) => <DashboardTable key={i} item={item} />)
+            )}
+
           </table>
         </div>
       </div>

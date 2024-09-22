@@ -48,15 +48,14 @@ const Sidebar = () => {
                             <li
                                 onClick={() => {
                                     if (exit) {
-                                        localStorage.removeItem('admin');
+                                        localStorage.removeItem('token');
+                                        localStorage.removeItem('role');
                                         location.reload()
                                     } else if (link) {
                                         navigate(link);
                                     }
                                 }}
-                                key={i}
-                                className='flex items-center text-white px-2 py-2'
-                            >
+                                key={i} className='flex items-center text-white px-2 py-2'>
                                 <div className='px-5 py-[0.65rem] flex items-center hover:bg-[#2D2D30] cursor-pointer w-full rounded-lg'>
                                     {icon}
                                     <p className='ml-3 text-base'>{title}</p>

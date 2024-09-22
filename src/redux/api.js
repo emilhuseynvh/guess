@@ -4,8 +4,8 @@ const token = localStorage.getItem('token')
 
 export const guessApi = createApi({
     reducerPath: 'guessApi',
-    baseQuery: fetchBaseQuery({ baseUrl: "https://ecommerse.davidhtml.xyz/" }),
-    tagTypes: ['Categories', 'Products', 'Brands', 'SubCategories', 'Images', 'Cart'],
+    baseQuery: fetchBaseQuery({ baseUrl: "https://ecommerse.apasni.me/" }),
+    tagTypes: ['Categories', 'Products', 'Brands', 'Images', 'Cart'],
     endpoints: (builder) => ({
         register: builder.mutation({
             query: ({ name, username, phone, gender, email, password }) => ({
@@ -96,7 +96,7 @@ export const guessApi = createApi({
                 },
                 body: { name, slug, categoryId }
             }),
-            invalidatesTags: ['SubCategory'],
+            invalidatesTags: ['Category'],
         }),
         deleteSubCategory: builder.mutation({
             query: (id) => ({
@@ -231,14 +231,14 @@ export const guessApi = createApi({
             invalidatesTags: ['Images'],
         }),
         addToCart: builder.mutation({
-            query: ({ productId, count }) => ({
+            query: ({ productId, count, color, size }) => ({
                 url: '/cart/add',
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
-                body: { productId, count }
+                body: { productId, count, color, size }
 
             }),
             invalidatesTags: ['Cart']
@@ -287,6 +287,12 @@ export const guessApi = createApi({
                 body: userData,
             }),
         }),
+        searchProductByInput: builder.mutation({
+            query: (value) => ({
+                url: `/products/search?q=${value}`,
+                method: 'GET'
+            })
+        })
     }),
 })
 
@@ -318,5 +324,6 @@ export const {
     useGetCartQuery,
     useDeleteFromCartMutation,
     useCartChangeMutation,
-    useUpdateUserMutation
+    useUpdateUserMutation,
+    useSearchProductByInputMutation
 } = guessApi

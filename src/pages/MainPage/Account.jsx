@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import Profile from '../../Components/MainPage/Account/Profile';
 import Order from '../../Components/MainPage/Account/Order';
-import ChangePassword from '../../Components/MainPage/Account/ChangePassword';
 import AccountInfo from '../../Components/MainPage/Account/AccountInfo';
-import { useNavigate } from 'react-router-dom';
+import Wishlist from './Wishlist';
 
 
 const Account = () => {
@@ -25,9 +24,6 @@ const Account = () => {
         </div>
         <div className={`${row === 1 ? 'block' : 'hidden'} ml-8 w-full`}>
           <Order />
-        </div>
-        <div className={`${row === 2 ? 'block' : 'hidden'} ml-8 w-full`}>
-          <ChangePassword />
         </div>
       </div>
     </div>

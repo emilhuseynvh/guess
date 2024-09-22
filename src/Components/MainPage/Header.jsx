@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { IoMdClose } from "react-icons/io";
 import { IoSearch } from "react-icons/io5";
 import MiniCart from './Cart/MiniCart';
-import { useGetAllCategoriesQuery, useGetCartQuery, useGetProductBySubcategoryIdMutation, useSearchProductsQuery } from '../../redux/api';
+import { useGetAllCategoriesQuery, useGetCartQuery, useGetProductBySubcategoryIdMutation, useSearchProductByInputMutation } from '../../redux/api';
 import { useDispatch, useSelector } from 'react-redux';
 import HamburgerMenu from './HamburgerMenu';
 import { MdClose } from 'react-icons/md';
@@ -14,24 +14,37 @@ const Header = ({ checkout }) => {
   const [search, setSearch] = useState(false)
   const [cart, setCart] = useState(false)
   const [showHamburger, setShowHamburger] = useState(false)
+  const [closeSearch, setCloseSearch] = useState(false)
+  const [input, setInput] = useState()
+  console.log(input);
+
 
   const navigate = useNavigate();
 
   const { data: allCategories } = useGetAllCategoriesQuery();
   const { data: products, error, isLoading } = useGetCartQuery();
+  const [inputValue, { data: searchData, error: searchError }] = useSearchProductByInputMutation()
+  console.log(searchData, searchError);
+
+  useEffect(() => {
+    if (input) {
+      inputValue(input)
+      setCloseSearch(false)
+    }
+    else {
+      setCloseSearch(true)
+    }
+  }, [input])
+
 
   const handleFilter = (id) => {
-    navigate({ pathname: '/products/all', search: `?subcategoryId=${id}`,})
+    navigate({ pathname: '/products/all', search: `?subcategoryId=${id}`, })
   };
-
-
-
 
   const handleClick = () => {
     const token = localStorage.getItem('token')
     token ? setCart(!cart) : navigate('/login')
   }
-
 
   return (
     <header className={`${showHamburger && 'fixed inset-0 bg-white z-50'} border-b-2 border-[#eee]`}>
@@ -66,14 +79,36 @@ const Header = ({ checkout }) => {
           {/* REGISTER LOGIN SECTION END */}
           <svg aria-hidden="true" focusable="false" role="presentation" className={`${checkout ? 'hidden' : 'block'} mr-3 icon icon-pin icon--stroke-based cursor-pointer`} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z" stroke="black" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"></path><path d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z" stroke="black" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"></path></svg>
           <div className="md:relative">
-            <div className={`${checkout ? 'hidden' : 'block'}`}>
+            <div className={`${checkout ? 'hidden' : 'block'} md:relative `}>
               <IoSearch className={`${search ? 'block' : 'hidden'} absolute left-2 md:left-[-30px] md:hidden z-40 top-[70px] md:top-1/2 -translate-y-1/2 text-[#979797] w-5 h-5 cursor-pointer`} />
-              <input className={`${search ? 'block' : 'hidden'} outline-none border-b-[1px] z-30 absolute top-[58px] pb-2 md:top-0 left-0 md:left-[-440px] w-[100vw] md:w-[430px] md:pl-1 pl-10`} placeholder='Search' type="text" />
-              <IoMdClose onClick={() => setSearch(!search)} className={`${search ? 'block' : 'hidden'} absolute right-[18px] md:left-[-30px] z-40 top-[64px] md:top-1/2 -translate-y-1/2 text-[#979797] w-6 h-6 cursor-pointer`} />
+              <input onChange={(e) => setInput(e.target.value)} className={`${search ? 'block' : 'hidden'} outline-none border-b-[1px] z-30 absolute  top-[58px] pb-2 md:top-0 left-0 md:left-[-440px] w-[100vw] md:w-[430px] md:pl-1 pl-10`} placeholder='Search' type="text" />
+              <IoMdClose onClick={() => setSearch(!search)} className={`${search ? 'block' : 'hidden'} absolute right-[18px] md:left-[-30px] z-40 top-[64px] md:top-1/2 text-[#979797] w-6 h-6 cursor-pointer`} />
+              <ul className={`${search ? 'block' : 'hidden'} ${closeSearch ? 'hidden' : 'block'} absolute left-0 md:-left-[440px] max-h-96 scroll z-40 w-[100vw] md:w-[435px] overflow-auto bg-white top-[90px] md:top-8 px-2 py-2`}>
+                {searchData?.length > 0 ? (
+                  searchData.map((item, i) => (
+                    <li onClick={() => {navigate((`products/all/details/${item.id}`)); setSearch(false)}} className='cursor-pointer border-b py-4 flex' key={i}>
+                      <img className='w-16' src={item.images[0]} alt="" />
+                      <div>
+                        <p className='text-sm pl-3 my-1'>{item.name}</p>
+                        <div className='flex pl-[10px] items-center gap-1'>
+                          <p className={`${item.discount ? 'text-sm line-through' : 'text-base'} `}>{item.price}</p>
+                          <p className='text-red-600'>{(item.price - (item.price / 100 + item.discount)).toFixed(2)}</p>
+                        </div>
+                        <div className='flex pl-3 gap-2 mt-2 items-center'>
+                          <p>Colors:</p>
+                          {item.Colors.map((item, i) => <div style={{ background: `${item}` }} className='rounded-[50%] w-4 h-4'></div>)}
+                        </div>
+                      </div>
+                    </li>
+                  ))
+                ) : (
+                  <li className='cursor-pointer py-1'>The product you are looking for was not found.</li>
+                )}
+              </ul>
             </div>
             <svg onClick={() => setSearch(!search)} aria-hidden="true" focusable="false" role="presentation" className={`${checkout ? 'hidden' : 'block'} mr-3 icon icon-search icon--stroke-based cursor-pointer`} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.6708 17.3415C14.3549 17.3415 17.3415 14.3549 17.3415 10.6708C17.3415 6.98661 14.3549 4 10.6708 4C6.98661 4 4 6.98661 4 10.6708C4 14.3549 6.98661 17.3415 10.6708 17.3415Z" stroke="black" strokeWidth="1.71429" strokeLinecap="round" strokeLinejoin="round"></path><path d="M20.0008 20L15.3854 15.3846" stroke="black" strokeWidth="1.71429" strokeLinecap="round" strokeLinejoin="round"></path></svg>
           </div>
-          <svg aria-hidden="true" focusable="false" role="presentation" className={`${checkout ? 'hidden' : 'block'} mr-3 icon icon-heart icon--stroke-based cursor-pointer`} data-modal-type="show-list-selection" data-variant-id="" data-product-id="" data-product-url="https://guess.com.au" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.0057 19.5216L4.36699 12.6025C0.21554 8.45103 6.31817 0.48025 12.0057 6.92884C17.6931 0.48025 23.7681 8.47871 19.6443 12.6025L12.0057 19.5216Z" stroke="black" strokeWidth="1.71429" strokeLinecap="round" strokeLinejoin="round" className="" data-modal-type="show-list-selection" data-variant-id="" data-product-id="" data-product-url="https://guess.com.au"></path></svg>
+          <svg onClick={() => navigate('/wishlist')} aria-hidden="true" focusable="false" role="presentation" className={`${checkout ? 'hidden' : 'block'} mr-3 icon icon-heart icon--stroke-based cursor-pointer`} data-modal-type="show-list-selection" data-variant-id="" data-product-id="" data-product-url="https://guess.com.au" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.0057 19.5216L4.36699 12.6025C0.21554 8.45103 6.31817 0.48025 12.0057 6.92884C17.6931 0.48025 23.7681 8.47871 19.6443 12.6025L12.0057 19.5216Z" stroke="black" strokeWidth="1.71429" strokeLinecap="round" strokeLinejoin="round" className="" data-modal-type="show-list-selection" data-variant-id="" data-product-id="" data-product-url="https://guess.com.au"></path></svg>
           <div className='md:relative'>
             <button onClick={() => handleClick()} className='mr-3 flex items-center'>
               <svg aria-hidden="true" focusable="false" role="presentation" className="icon icon-cart icon--stroke-based" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19.492 18.8997C19.5121 19.0785 19.4941 19.2595 19.4392 19.4308C19.3843 19.6021 19.2937 19.7598 19.1735 19.8936C19.0529 20.0272 18.9055 20.1337 18.7407 20.2062C18.576 20.2786 18.3978 20.3154 18.2179 20.314H5.78211C5.60216 20.3154 5.42397 20.2786 5.25926 20.2062C5.09455 20.1337 4.94705 20.0272 4.82649 19.8936C4.70625 19.7598 4.6157 19.6021 4.5608 19.4308C4.5059 19.2595 4.48789 19.0785 4.50795 18.8997L5.62921 8.84662H18.3708L19.492 18.8997Z" stroke="black" strokeWidth="1.71429" strokeLinecap="round" strokeLinejoin="round"></path><path d="M8.81458 8.84663V6.93539C8.81458 6.09057 9.15018 5.28036 9.74756 4.68298C10.3449 4.0856 11.1552 3.75 12 3.75C12.8448 3.75 13.655 4.0856 14.2524 4.68298C14.8498 5.28036 15.1854 6.09057 15.1854 6.93539V8.84663" stroke="black" strokeWidth="1.71429" strokeLinecap="round" strokeLinejoin="round"></path></svg>

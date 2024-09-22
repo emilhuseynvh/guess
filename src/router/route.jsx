@@ -15,6 +15,8 @@ import DashboardProduct from "../pages/Dashboard/DashboardProduct";
 import DashboardCategory from "../pages/Dashboard/DashboardCategory";
 import DashboardBrand from "../pages/Dashboard/DashboardBrand";
 import Account from "../pages/MainPage/Account";
+import Order from "../Components/MainPage/Account/Order";
+import Wishlist from "../pages/MainPage/Wishlist";
 
 export const route = createBrowserRouter(
     createRoutesFromElements(
@@ -22,11 +24,12 @@ export const route = createBrowserRouter(
             <Route path="/" element={<PublicPage />} >
                 <Route index path="/" element={<Home />} />
                 <Route path="/products/all" element={<Collection />} />
-                <Route path="/products/all/details" element={<Details />} />
+                <Route path="/products/all/details/:id" element={<Details />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route index path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/account" element={<Account />} />
+                <Route path="/wishlist" element={<Wishlist />} />
             </Route>
             <Route path="/checkout" element={<Checkout />}>
                 <Route index path="/checkout" element={<CheckoutPage />} />

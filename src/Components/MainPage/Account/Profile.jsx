@@ -47,7 +47,6 @@ const Profile = ({ user, row, setRow, image, setImage }) => {
             <ul className='border-t pt-4 text-md'>
                 <li onClick={() => setRow(null)} className='py-1 cursor-pointer hover:underline'>Contact Info</li>
                 <li onClick={() => setRow(1)} className='py-1 cursor-pointer hover:underline'>Orders</li>
-                <li onClick={() => setRow(2)} className='py-1 cursor-pointer hover:underline'>Change Password</li>
                 <li onClick={() => handleLogOut()} className='py-1 cursor-pointer hover:underline'>Log out</li>
             </ul>
         </div>

@@ -31,9 +31,9 @@ const CartElement = ({ item }) => {
                 </div>
                 <div>
                     <div className='flex items-center border border-[#e6e6e6] w-[90px]'>
-                        <button disable={item.count === 1} onClick={() => handleChange(-1)} className={`${isLoading && 'cursor-not-allowed'} ${item.count === 1 && 'cursor-not-allowed'} bg-[#fafafa] w-6 h-[34px]`}>-</button>
+                        <button disable={item.count === 1} onClick={() => handleChange(item.count - 1)} className={`${isLoading && 'cursor-not-allowed'} ${item.count === 1 && 'cursor-not-allowed'} bg-[#fafafa] w-6 h-[34px]`}>-</button>
                         <div className='w-[42px] h-[34px] flex justify-center items-center border-r border-l border-[#e6e6e6]'>{item.count}</div>
-                        <button disable={isLoading} onClick={() => handleChange(1)} className={`${isLoading && 'cursor-not-allowed'} bg-[#fafafa] w-6 h-[34px]`}>+</button>
+                        <button disable={isLoading} onClick={() => handleChange(item.count + 1)} className={`${isLoading && 'cursor-not-allowed'} bg-[#fafafa] w-6 h-[34px]`}>+</button>
                     </div>
                 </div>
                 <h3 className='text-sm font-bold'>Item total: {price}</h3>

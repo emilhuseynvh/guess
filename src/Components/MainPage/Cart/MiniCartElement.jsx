@@ -2,15 +2,11 @@ import React from 'react'
 import { useCartChangeMutation, useDeleteFromCartMutation } from '../../../redux/api'
 
 const MiniCartElement = ({ item }) => {
-    console.log(item);
 
 
     const { id, images, name, price, total } = item.product_id
     const [itemId, { data, error }] = useDeleteFromCartMutation()
     const [changeParams, { data: changedData, error: ChangedError, isLoading }] = useCartChangeMutation()
-    console.log(isLoading);
-
-    console.log(changedData, ChangedError);
 
 
     const handleDelete = () => {

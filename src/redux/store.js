@@ -8,6 +8,7 @@ import openReducer from "./open";
 import productFilterSlice from "./productFilterSlice";
 import subCategoryFilterSlice from "./subCategoryFilterSlice";
 import { productDetailsSlice } from "./ProductDetailsSlice";
+import paginationSlice from "./paginationSlice";
 
 export const store = configureStore({
     reducer: {
@@ -20,7 +21,8 @@ export const store = configureStore({
         productFilter: productFilterSlice,
         subCategoryFilter: subCategoryFilterSlice,
         subcategory: subCategorySlice,
-        productDetails: productDetailsSlice.reducer
+        productDetails: productDetailsSlice.reducer,
+        pagination: paginationSlice,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(guessApi.middleware)
 });

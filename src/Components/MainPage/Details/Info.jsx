@@ -19,8 +19,8 @@ const Info = ({ product }) => {
     console.log(data, error);
 
     const handleClick = () => {
-        addToCart({ productId: id, count: quant, color, size });
-    }
+        addToCart({ productId: id, count: Number(quant), color, size });
+    }; 
 
 
     const [info, setInfo] = useState(1)

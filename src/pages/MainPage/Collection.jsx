@@ -5,10 +5,11 @@ import FilterMenu from '../../Components/MainPage/Collection/FilterMenu';
 import Top from '../../Components/MainPage/Collection/Top';
 import Card from '../../Components/MainPage/Collection/Card';
 import TopMobile from '../../Components/MainPage/Collection/TopMobile';
-import { useSearchProductsQuery } from '../../redux/api';
+import { useGetAllProductQuery, useSearchProductsQuery } from '../../redux/api';
+import Pagination from '../../Components/MainPage/Collection/Pagination';
 
 const Collection = () => {
-  const location = useLocation(); 
+  const location = useLocation();
   const localGrid = localStorage.getItem('grid');
   const [grid, setGrid] = useState(localGrid ? Number(localGrid) : 4);
   const [params, setParams] = useState(null);
@@ -20,6 +21,7 @@ const Collection = () => {
   }, [location]);
 
   const { data, error: searchError } = useSearchProductsQuery(params);
+  const { data: allProducts } = useGetAllProductQuery()
 
   useEffect(() => {
     localStorage.setItem('grid', grid);
@@ -32,11 +34,11 @@ const Collection = () => {
       <TopMobile />
       <div className='flex'>
         <div className='w-1/5 lg:block hidden'>
-          <FilterMenu  />
+          <FilterMenu />
         </div>
         <div className={`lg:w-4/5 w-full gap-4 grid grid-cols-${grid}`}>
           {!data ? (
-            <p>Yüklənir...</p> 
+            <p>Yüklənir...</p>
           ) : (
             data?.data?.map((item, i) => (
               <div key={i}>
@@ -45,6 +47,9 @@ const Collection = () => {
             ))
           )}
         </div>
+      </div>
+      <div className='flex justify-center mt-12 mb-4'>
+        <Pagination allProducts={allProducts && allProducts} />
       </div>
     </div>
   );

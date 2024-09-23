@@ -14,7 +14,6 @@ const CustomTextField = styled(TextField)({
 });
 
 const InputSlider = ({ value, setValue }) => {
-    console.log(value);
     
 
     const handleChange = (event, newValue) => {

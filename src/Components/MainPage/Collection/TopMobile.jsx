@@ -1,21 +1,68 @@
 import React, { useState } from 'react'
 import { FaPlus, FaMinus } from "react-icons/fa";
 import CollectionCheckbox from './CollectionCheckbox';
+import AccardionItem from './AccardionItem';
+import { eColor, eSize } from '../../../enum/enumData';
+import { useNavigate } from 'react-router-dom';
 
-const sorted = ['Best sellers', 'Featured', 'Price: low to high', 'Price: high to low', 'New Arrivals']
-const checkbox = [
-    { size: 27, quant: 1 },
-    { size: 28, quant: 19 },
-    { size: 29, quant: 25 },
-    { size: 30, quant: 24 },
-    { size: 31, quant: 26 }
+const sorted = [
+    {
+        name: 'Recommended'
+    },
+    {
+        name: 'Latest',
+        sort: 'time',
+        order: 'desc'
+    },
+    {
+        name: 'Price: low to high',
+        sort: 'price',
+        order: 'asc'
+    },
+    {
+        name: 'Price: high to low',
+        sort: 'price',
+        order: 'desc'
+    }
 ]
+const filterMobile = [
+    {
+        title: 'Size',
+        element: eSize
+    },
+    {
+        title: 'Color',
+        element: eColor
+    },
+    {
+        title: 'Discount',
+        element: ['Discount']
+    },
+    {
+        title: 'Price',
+    }
+];
 
 const TopMobile = () => {
+    const navigate = useNavigate()
 
     const [sort, setSort] = useState(false)
     const [filter, setFilter] = useState(false)
     const [accardion, setAccardion] = useState(null)
+
+    const handleSort = (order, sort) => {
+        const queryParams = new URLSearchParams(window.location.search)
+
+        if (sort && order) {
+            queryParams.set('sortBy', sort)
+            queryParams.set('sortOrder', order)
+        }
+        navigate({
+            pathname: '/products/all',
+            search: `?${queryParams.toString()}`,
+        });
+        setSort(!sort)
+    }
 
     return (
         <>
@@ -33,11 +80,11 @@ const TopMobile = () => {
             <div className={`${sort ? 'top-0' : '-top-full'} duration-300 fixed w-full h-screen  left-0 right-0 bg-white z-50 px-4 pt-4 pb-6`}>
                 <div className='flex justify-between pb-6 pt-2 border-b border-black'>
                     <p className='text-lg font-semibold'>Sort By</p>
-                    <svg onClick={() => setSort(!sort)} aria-hidden="true" focusable="false" role="presentation" className="icon icon-close icon--stroke-based" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19.5 5L5 19.5" stroke="black" strokeWidth="1.71429" strokeLinecap="round" strokeLinejoin="round"></path><path d="M5 5L19.5 19.5" stroke="black" strokeWidth="1.71429" strokeLinecap="round" strokeLinejoin="round"></path></svg>
+                    <svg onClick={() => setSort(!sort)} aria-hidden="true" focusable="false" role="presentation" className="cursor-pointer" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19.5 5L5 19.5" stroke="black" strokeWidth="1.71429" strokeLinecap="round" strokeLinejoin="round"></path><path d="M5 5L19.5 19.5" stroke="black" strokeWidth="1.71429" strokeLinecap="round" strokeLinejoin="round"></path></svg>
                 </div>
                 <ul>
                     {sorted.map((item, i) => {
-                        return <li key={i} className='border-b-2 border-[#eee] text-base py-4 pl-14 hover:underline cursor-pointer'>{item}</li>
+                        return <li key={i} onClick={() => handleSort(item.order, item.sort)} className='border-b-2 border-[#eee] text-base py-4 pl-14 hover:underline cursor-pointer'>{item.name}</li>
                     })}
                 </ul>
             </div>
@@ -46,22 +93,16 @@ const TopMobile = () => {
                 <div className='flex justify-between items-center pb-6 pt-2 border-b border-black'>
                     <p className='text-lg font-semibold'>Filter</p>
                     <p className='text-sm font-medium'>(186 styles)</p>
-                    <svg onClick={() => setFilter(!filter)} aria-hidden="true" focusable="false" role="presentation" className="icon icon-close icon--stroke-based" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19.5 5L5 19.5" stroke="black" strokeWidth="1.71429" strokeLinecap="round" strokeLinejoin="round"></path><path d="M5 5L19.5 19.5" stroke="black" strokeWidth="1.71429" strokeLinecap="round" strokeLinejoin="round"></path></svg>
+                    <svg onClick={() => setFilter(!filter)} aria-hidden="true" focusable="false" role="presentation" className="cursor-pointer" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19.5 5L5 19.5" stroke="black" strokeWidth="1.71429" strokeLinecap="round" strokeLinejoin="round"></path><path d="M5 5L19.5 19.5" stroke="black" strokeWidth="1.71429" strokeLinecap="round" strokeLinejoin="round"></path></svg>
                 </div>
-                <ul>
-                    <div className='border-b-2 border-[#eee] text-base py-4 px-2 cursor-pointer'>
-                        <div onClick={() => setAccardion(accardion === 1 ? null : 1)} className='flex justify-between'>
-                            <h4 className='text-base font-semibold'>Size</h4>
-                            <img className='select-none' src={accardion === 1 ? 'assets/img/minus.svg' : 'assets/img/plus.svg'} alt="Icon" />
-                        </div>
-                        <div style={{ maxHeight: accardion === 1 ? '500px' : '0', transition: 'max-height 0.5s ease', }} className={`pt-5 h-56 ${accardion === 1 ? 'overflow-y-auto' : 'overflow-hidden'}`}>
-                            {checkbox.map((item, i) => {
-                                return <CollectionCheckbox key={i} item={item} />
-                            })}
-                        </div>
-
+                {filterMobile.map((item, i) => (
+                    <div key={i}>
+                        <AccardionItem
+                            i={i}
+                            item={item}
+                        />
                     </div>
-                </ul>
+                ))}
             </div>
         </>
     )

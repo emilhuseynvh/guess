@@ -6,7 +6,6 @@ import SubcategoryMenu from './SubcategoryMenu';
 const HamburgerMenu = ({ allCategories, setShowHamburger, showHamburger }) => {
     const [showSubcategory, setShowSubcategory] = useState(false)
     const [category, setCategory] = useState(null)
-    console.log(category);
     
 
 

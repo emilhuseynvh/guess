@@ -9,14 +9,13 @@ import HamburgerMenu from './HamburgerMenu';
 import { MdClose } from 'react-icons/md';
 
 const Header = ({ checkout }) => {
-
+  const listImage = ['assets/img/header-list1.webp', 'assets/img/header-list2.webp', 'assets/img/header-list4.webp', 'assets/img/header-list3.webp',]
 
   const [search, setSearch] = useState(false)
   const [cart, setCart] = useState(false)
   const [showHamburger, setShowHamburger] = useState(false)
   const [closeSearch, setCloseSearch] = useState(false)
   const [input, setInput] = useState()
-  console.log(input);
 
 
   const navigate = useNavigate();
@@ -24,7 +23,6 @@ const Header = ({ checkout }) => {
   const { data: allCategories } = useGetAllCategoriesQuery();
   const { data: products, error, isLoading } = useGetCartQuery();
   const [inputValue, { data: searchData, error: searchError }] = useSearchProductByInputMutation()
-  console.log(searchData, searchError);
 
   useEffect(() => {
     if (input) {
@@ -55,12 +53,17 @@ const Header = ({ checkout }) => {
             {allCategories && allCategories.map((item, i) => {
               return (
                 <div key={i} className='group'>
-                  <li key={i} className='py-[18px] mx-3 cursor-pointer tracking-[.2em]'>{item.name}</li>
-                  <div className='absolute w-screen left-0 h-[40vh] z-40 bg-white hidden group-hover:block px-12'>
-                    <p className='cursor-pointer hover:underline text-xs font-semibold my-4'>View all</p>
-                    {item.Subcategory.length > 0 && item.Subcategory.map((item, i) => {
-                      return <p key={i} onClick={() => handleFilter(item.id)} className='my-4 cursor-pointer hover:underline'>{item.name}</p>
-                    })}
+                  <li key={i} className={`py-[18px] mx-3 cursor-pointer tracking-[.2em]`}>{item.name}</li>
+                  <div className='absolute w-screen left-0 h-[40vh] z-40 bg-white hidden group-hover:flex px-12'>
+                    <div>
+                      <p className='cursor-pointer hover:underline text-xs font-semibold my-4'>View all</p>
+                      {item.Subcategory.length > 0 && item.Subcategory.map((item, i) => {
+                        return <p key={i} onClick={() => handleFilter(item.id)} className='my-4 cursor-pointer hover:underline'>{item.name}</p>
+                      })}
+                    </div>
+                    <div className='w-96 h-96 ml-40'>
+                      <img src={`./../../../../public/assets/img/header-list${i + 1}.webp`} alt="Category Image" />
+                    </div>
                   </div>
                 </div>
               )
@@ -86,7 +89,7 @@ const Header = ({ checkout }) => {
               <ul className={`${search ? 'block' : 'hidden'} ${closeSearch ? 'hidden' : 'block'} absolute left-0 md:-left-[440px] max-h-96 scroll z-40 w-[100vw] md:w-[435px] overflow-auto bg-white top-[90px] md:top-8 px-2 py-2`}>
                 {searchData?.length > 0 ? (
                   searchData.map((item, i) => (
-                    <li onClick={() => {navigate((`products/all/details/${item.id}`)); setSearch(false)}} className='cursor-pointer border-b py-4 flex' key={i}>
+                    <li onClick={() => { navigate((`products/all/details/${item.id}`)); setSearch(false) }} className='cursor-pointer border-b py-4 flex' key={i}>
                       <img className='w-16' src={item.images[0]} alt="" />
                       <div>
                         <p className='text-sm pl-3 my-1'>{item.name}</p>

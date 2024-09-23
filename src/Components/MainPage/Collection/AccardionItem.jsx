@@ -3,24 +3,33 @@ import { IoChevronDown } from 'react-icons/io5';
 import CheckBox from '../Checkout/CheckBox';
 import InputSlider from './InputSlider';
 import { useNavigate } from 'react-router-dom';
+import { FaCheck } from 'react-icons/fa6';
 
 const AccardionItem = ({ item, i }) => {
-    const navigate = useNavigate()
-
-
+    const navigate = useNavigate();
     const { title, element } = item;
 
     const [checkParent, setCheckParent] = useState(false);
     const [accardion, setAccardion] = useState(false);
-
     const [size, setSize] = useState([]);
     const [color, setColor] = useState([]);
     const [discount, setDiscount] = useState(false);
-    const [brand, setBrand] = useState('');
     const [sliderValue, setSliderValue] = useState([30, 500]);
-    console.log(discount);
 
+    useEffect(() => {
+        const savedColors = JSON.parse(localStorage.getItem('selectedColors'));
+        if (savedColors) {
+            setColor(savedColors);
+        }
+    }, []);
 
+    useEffect(() => {
+        localStorage.removeItem('selectedColors')
+    }, [])
+
+    useEffect(() => {
+        localStorage.setItem('selectedColors', JSON.stringify(color));
+    }, [color]);
 
     useEffect(() => {
         const queryParams = new URLSearchParams(window.location.search);
@@ -31,17 +40,11 @@ const AccardionItem = ({ item, i }) => {
             queryParams.delete('size');
         }
 
-        if (color.length > 0) {
-            queryParams.set('color', color.join(','));
-        } else {
-            queryParams.delete('color');
-        }
-
         navigate({
             pathname: '/products/all',
             search: `?${queryParams.toString()}`,
         });
-    }, [size, color, brand]);
+    }, [size, color]);
 
     useEffect(() => {
         const queryParams = new URLSearchParams(window.location.search);
@@ -75,21 +78,33 @@ const AccardionItem = ({ item, i }) => {
         });
     }, [discount, navigate]);
 
+    useEffect(() => {
+        const queryParams = new URLSearchParams(window.location.search);
+        const savedColors = JSON.parse(localStorage.getItem('selectedColors'));
 
+        if (savedColors && savedColors.length > 0) {
+            queryParams.set('color', savedColors.join(','));
+        } else {
+            queryParams.delete('color');
+        }
 
-
+        navigate({
+            pathname: '/products/all',
+            search: `?${queryParams.toString()}`,
+        });
+    }, [color, navigate]);
 
     const toggleFunc = (list) => {
         if (title === 'Color') {
             if (color.includes(list)) {
-                const newColor = color.filter(item => item !== list);
+                const newColor = color.filter((item) => item !== list);
                 setColor(newColor);
             } else {
                 setColor([...color, list]);
             }
         } else if (title === 'Size') {
             if (size.includes(list)) {
-                const newSize = size.filter(item => item !== list);
+                const newSize = size.filter((item) => item !== list);
                 setSize(newSize);
             } else {
                 setSize([...size, list]);
@@ -103,18 +118,23 @@ const AccardionItem = ({ item, i }) => {
                 <h3 className='text-base font-normal block leading-[1.5] pb-2'>{title}</h3>
                 <IoChevronDown className={`${accardion ? '-rotate-180' : 'rotate-0'} duration-300`} />
             </div>
-            <ul style={{ maxHeight: accardion ? '500px' : '0', transition: 'max-height 0.5s ease' }} className="pl-3 text-xs font-medium overflow-hidden">
+            <ul
+                style={{ maxHeight: accardion ? '500px' : '0', transition: 'max-height 0.5s ease' }}
+                className='pl-3 text-xs font-medium overflow-hidden'
+            >
                 {element?.map((list, index) => (
                     <div key={index} className={`${title === 'Price' ? 'hidden' : 'flex'} my-2`} onClick={() => title === 'Discount' ? setDiscount(!discount) : toggleFunc(list)}>
                         <div className={title !== 'Color' ? 'block' : 'hidden'}>
                             <CheckBox checkParent={checkParent} setCheckParent={setCheckParent} title={title} />
                         </div>
-                        <div style={{ background: `${list}`, borderColor: `${list === 'WHITE' ? 'black' : list}` }} className={`${title === 'Color' ? 'block' : 'hidden'} border border-black w-5 h-5 rounded-[50%]`}></div>
+                        <div style={{ background: `${list}`, borderColor: `${list === 'WHITE' ? 'black' : list}` }} className={`${title === 'Color' ? 'block' : 'hidden'} cursor-pointer flex items-center justify-center border w-5 h-5 rounded-[50%]`}>
+                            <FaCheck className={`${color.includes(list) ? 'block' : 'hidden'} ${list === 'WHITE' ? 'text-black' : 'text-white'}`} />
+                        </div>
                         <li className='cursor-pointer pb-1 ml-2 select-none'>{list}</li>
                     </div>
                 ))}
                 {title === 'Price' && (
-                    <div className="mr-5">
+                    <div className='mr-5'>
                         <InputSlider value={sliderValue} setValue={setSliderValue} />
                     </div>
                 )}

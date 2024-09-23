@@ -39,16 +39,6 @@ const ProductForm = ({ initialValues, onSubmit }) => {
             setUploadedFiles([]);
         }
     }, [initialValues]);
-    console.log(initialValues);
-    console.log(initialValues?.images);
-    console.log(uploadedFiles);
-    
-
-    useEffect(() => {
-        console.log(uploadedFiles);
-    }, [uploadedFiles])
-
-
 
     useEffect(() => {
         productCategory && id(productCategory);
@@ -77,7 +67,6 @@ const ProductForm = ({ initialValues, onSubmit }) => {
                 toast.error('Error uploading image');
             }
         }
-        console.log(initialValues);
     };
 
     const handleRemove = (fileUrl) => {
@@ -98,7 +87,7 @@ const ProductForm = ({ initialValues, onSubmit }) => {
             images: uploadedFiles,
         };
 
-        onSubmit(productDetails);
+       await onSubmit(productDetails);
     };
 
     const formInput = [

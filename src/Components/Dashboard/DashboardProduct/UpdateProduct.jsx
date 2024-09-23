@@ -37,18 +37,6 @@ const UpdateProduct = () => {
         }
     };
 
-    useEffect(() => {
-        if (productData) {
-            console.log('Fetched Product Data:', productData);
-        }
-        if (productError) {
-            console.log('Error fetching product:', productError);
-        }
-        if (updateError) {
-            console.log('Error updating product:', updateError);
-        }
-    }, [productData, productError, updateError]);
-
     return (
         <div className={productUpdate ? 'block' : 'hidden'}>
             <div className="absolute inset-0 opacity-40 bg-black z-40 w-screen h-screen"></div>

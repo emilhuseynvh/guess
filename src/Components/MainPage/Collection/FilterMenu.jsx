@@ -8,6 +8,7 @@ const FilterMenu = () => {
     const navigate = useNavigate();
     const { data: allBrand, isLoading, isError } = useGetAllBrandsQuery();
 
+
     const filter = [
 
         {

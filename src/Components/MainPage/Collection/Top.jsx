@@ -2,11 +2,13 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useGetAllProductQuery } from '../../../redux/api'
 import Pagination from './Pagination'
+import { useSelector } from 'react-redux'
 
 const Top = ({ grid, setGrid }) => {
     const navigate = useNavigate()
 
     const { data: allProducts } = useGetAllProductQuery()
+    const data = useSelector((state) => state.products.data);
 
     const sorted = [
         {
@@ -55,7 +57,7 @@ const Top = ({ grid, setGrid }) => {
             <div className='pt-16 pb-6 w-4/5 justify-between'>
                 <h4 className='text-lg font-medium mb-[5px] '>Men's Clothing</h4>
                 <div className='flex justify-between items-center'>
-                    <p className='text-xs font-light'>({allProducts?.meta.totalProducts} styles)</p>
+                    <p className='text-xs font-light'>({data?.meta.totalProducts} styles)</p>
                     <Pagination allProducts={allProducts && allProducts} />
                     <div className='flex items-end'>
                         <svg onClick={() => onHandleChange(2)} className={`${grid === 2 ? 'opacity-60' : 'opacity-100'} mx-1 cursor-pointer`} width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"><title>3E846D32-2B32-44D1-A889-C72370C1DBBC</title><desc>Created with sketchtool.</desc><g id="Category-page" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd"> <g id="Desktop-HD-Collection-page" transform="translate(-1186.000000, -167.000000)" fill="#000000"><g id="grid-4" transform="translate(1186.000000, 167.000000)"><rect id="Rectangle" x="0" y="0" width="8" height="8"></rect><rect id="Rectangle-Copy-13" x="0" y="10" width="8" height="8"></rect><rect id="Rectangle-Copy" x="10" y="0" width="8" height="8"></rect><rect id="Rectangle-Copy-14" x="10" y="10" width="8" height="8"></rect></g></g></g></svg>

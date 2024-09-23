@@ -9,6 +9,7 @@ import productFilterSlice from "./productFilterSlice";
 import subCategoryFilterSlice from "./subCategoryFilterSlice";
 import { productDetailsSlice } from "./ProductDetailsSlice";
 import paginationSlice from "./paginationSlice";
+import productSlice from "./productSlice";
 
 export const store = configureStore({
     reducer: {
@@ -23,6 +24,7 @@ export const store = configureStore({
         subcategory: subCategorySlice,
         productDetails: productDetailsSlice.reducer,
         pagination: paginationSlice,
+        products: productSlice
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(guessApi.middleware)
 });

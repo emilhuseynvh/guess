@@ -7,11 +7,14 @@ import Card from '../../Components/MainPage/Collection/Card';
 import TopMobile from '../../Components/MainPage/Collection/TopMobile';
 import { useGetAllProductQuery, useSearchProductsQuery } from '../../redux/api';
 import Pagination from '../../Components/MainPage/Collection/Pagination';
+import { useDispatch } from 'react-redux';
+import { setData } from '../../redux/productSlice';
 
 const Collection = () => {
-  const location = useLocation();
   const localGrid = localStorage.getItem('grid');
   const [grid, setGrid] = useState(localGrid ? Number(localGrid) : 4);
+  const dispatch = useDispatch();
+  const location = useLocation();
   const [params, setParams] = useState(null);
 
   useEffect(() => {
@@ -20,12 +23,14 @@ const Collection = () => {
     setParams(fullQuery);
   }, [location]);
 
-  const { data, error: searchError } = useSearchProductsQuery(params);
+  const { data } = useSearchProductsQuery(params);
   const { data: allProducts } = useGetAllProductQuery()
 
   useEffect(() => {
-    localStorage.setItem('grid', grid);
-  }, [grid]);
+    if (data) {
+      dispatch(setData(data));
+    }
+  }, [data, dispatch]);
 
   return (
     <div className='w-[95%] mx-auto py-7'>
@@ -49,7 +54,7 @@ const Collection = () => {
         </div>
       </div>
       <div className='flex justify-center mt-12 mb-4'>
-        <Pagination allProducts={allProducts && allProducts} />
+        <Pagination data={data} allProducts={allProducts && allProducts} />
       </div>
     </div>
   );

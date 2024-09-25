@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom'; // useLocation hook
+import { useLocation, useNavigate } from 'react-router-dom'; // useLocation və useNavigate hook-larını əlavə et
 import BreadCrumbs from '../../Components/MainPage/BreadCrumbs';
 import FilterMenu from '../../Components/MainPage/Collection/FilterMenu';
 import Top from '../../Components/MainPage/Collection/Top';
@@ -15,7 +15,22 @@ const Collection = () => {
   const [grid, setGrid] = useState(localGrid ? Number(localGrid) : 4);
   const dispatch = useDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
   const [params, setParams] = useState(null);
+
+  useEffect(() => {
+    const handlePopState = (event) => {
+      if (window.location.pathname === '/products/all') {
+        navigate('/');
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, [navigate]);
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -24,7 +39,7 @@ const Collection = () => {
   }, [location]);
 
   const { data } = useSearchProductsQuery(params);
-  const { data: allProducts } = useGetAllProductQuery()
+  const { data: allProducts } = useGetAllProductQuery();
 
   useEffect(() => {
     if (data) {
@@ -61,3 +76,4 @@ const Collection = () => {
 };
 
 export default Collection;
+

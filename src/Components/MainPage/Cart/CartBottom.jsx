@@ -4,17 +4,18 @@ import { Link, useNavigate } from 'react-router-dom';
 import FreeShipping from '../FreeShipping';
 import { useGetCartQuery } from '../../../redux/api';
 
-const CartBottom = ({ bl, setCart, cart }) => {
+const CartBottom = ({ bl, setCart, cart, card }) => {
+
     const navigate = useNavigate()
     let total = 0
-    
+
 
     const { data: products, error, isLoading } = useGetCartQuery();
-    
+
 
     products?.forEach(element => {
-       total += element.product_id.price * element.count  
-           
+        total += element.product_id.price * element.count
+
     });
 
     return (
@@ -38,7 +39,7 @@ const CartBottom = ({ bl, setCart, cart }) => {
                     <p className='text-lg font-semibold'>Total</p>
                     <p className='text-lg font-semibold'>${(total - (.1 * total)).toFixed(2)}</p>
                 </div>
-                <p onClick={() => { setCart(!cart), navigate('/cart') }} to='/cart' className={`${bl ? 'hidden' : 'block'} text-center underline text-sm mt-3 cursor-pointer`}>View cart</p>
+                <p onClick={() => { setCart(!cart), navigate('/cart') }} to='/cart' className={`${bl ? 'hidden' : card ? 'hidden' : 'hidden md:block'}  text-center underline text-sm mt-3 cursor-pointer`}>View cart</p>
                 <Link to='/checkout' className='bg-black block text-white mb-5 font-medium text-base mt-3 text-center w-full py-[9px]'>Proceed To Checkout</Link>
                 <div className={`${bl ? 'hidden' : 'block'}`}>
                     <FreeShipping />

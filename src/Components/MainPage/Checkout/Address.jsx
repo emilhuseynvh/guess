@@ -1,10 +1,8 @@
-import React from 'react'
-import Select from './Select'
-import Input from './Input'
-import { Form, Formik } from 'formik';
-import * as Yup from 'yup'
+import React, { useEffect, useState } from 'react';
+import Select from './Select';
+import SimpleInput from './SimpleInput';
 
-const state = [
+const stateOptions = [
     'Australian Capital Territory',
     'New South Wales',
     'Northern Territory',
@@ -13,67 +11,139 @@ const state = [
     'Tasmania',
     'Victoria',
     'Western Australia'
-]
-
-const validationSchema = Yup.object({
-    firstName: Yup.string().required('First name is required'),
-    lastName: Yup.string().required('Last name is required'),
-    company: Yup.string(),
-    address: Yup.string().required('Address is required'),
-    apartment: Yup.string(),
-    city: Yup.string().required('City is required'),
-    postcode: Yup.number().typeError('Postcode must be a number').required('Postcode is required'),
-    phone: Yup.number().typeError('Phone number must be a number').required('Phone is required')
-});
+];
 
 const Address = () => {
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [company, setCompany] = useState('');
+    const [address, setAddress] = useState('');
+    const [apartment, setApartment] = useState('');
+    const [city, setCity] = useState('');
+    const [stateValue, setStateValue] = useState('');
+    const [postcode, setPostcode] = useState('');
+    const [phone, setPhone] = useState('');
+    const [country, setCountry] = useState('');
+    useEffect(() => {
+        console.log(firstName);
+    }, [firstName, setFirstName])
+    
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const formValues = {
+            firstName,
+            lastName,
+            company,
+            address,
+            apartment,
+            city,
+            state: stateValue,
+            postcode,
+            phone,
+            country
+        };
+        console.log(formValues);
+    };
+
     return (
-        <Formik
-            initialValues={{
-                firstName: '',
-                lastName: '',
-                company: '',
-                address: '',
-                apartment: '',
-                city: '',
-                postcode: '',
-                phone: ''
-            }}
-            validationSchema={validationSchema}
-            onSubmit={(values) => {
-                console.log(values);
-            }}
-        >
-            <Form>
-                <Select option={['Australia', 'New Zealand', 'Baku']} label={'Country/Region'} />
-                <div className='flex'>
-                    <div className='w-1/2 mr-2'>
-                        <Input label={'First name'} type={'text'} name='firstName' />
-                    </div>
-                    <div className='w-1/2 ml-2'>
-                        <Input label={'Last name'} type={'text'} name='lastName' />
-                    </div>
-                </div>
-                <Input type={'text'} label={'Company (optional)'} name='company' />
-                <Input type={'text'} label={'Address'} name='address' />
-                <Input type={'text'} label={'Apartment, suite, etc. (optional)'} name='apartment' />
-                <div className='flex'>
-                    <div className='w-1/3'>
-                        <Input type={'text'} label={'City'} name='city' />
-                    </div>
-                    <div className='w-1/3 mx-4'>
-                        <Select label={'State/territory'} option={state} name='state' />
-                    </div>
-                    <div className='w-1/3'>
-                        <Input type={'number'} label={'Postcode'} name='postcode' />
-                    </div>
-                </div>
-                <Input type={'number'} label={'Phone'} name='phone' />
-            </Form>
+        <form onSubmit={handleSubmit}>
+            <Select name="country" label="Country/Region" option={['Australia', 'New Zealand', 'Baku']} value={country} onChange={(e) => setCountry(e.target.value)}/>
 
-            <Input type={'number'} label={'Phone'} name='phone' />
-        </Formik>
-    )
-}
+            <div className='flex'>
+                <div className='w-1/2 mr-2'>
+                    <SimpleInput 
+                        label="First name" 
+                        name="firstName" 
+                        type="text" 
+                        value={firstName} 
+                        onChange={(e) => setFirstName(e.target.value)}
+                        placeholder="Enter your first name" 
+                    />
+                </div>
+                <div className='w-1/2 ml-2'>
+                    <SimpleInput 
+                        label="Last name" 
+                        name="lastName" 
+                        type="text" 
+                        value={lastName} 
+                        onChange={(e) => setLastName(e.target.value)}
+                        placeholder="Enter your last name" 
+                    />
+                </div>
+            </div>
 
-export default Address
+            <SimpleInput 
+                label="Company (optional)" 
+                name="company" 
+                type="text" 
+                value={company} 
+                onChange={(e) => setCompany(e.target.value)} // Update company state
+                placeholder="Enter your company name" 
+            />
+
+            <SimpleInput
+                label="Address"
+                name="address"
+                type="text"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)} // Update address state
+                placeholder="Enter your address"
+            />
+
+            <SimpleInput
+                label="Apartment, suite, etc. (optional)"
+                name="apartment"
+                type="text"
+                value={apartment}
+                onChange={(e) => setApartment(e.target.value)} // Update apartment state
+                placeholder="Enter apartment or suite"
+            />
+
+            <div className='flex'>
+                <div className='w-1/3'>
+                    <SimpleInput
+                        label="City"
+                        name="city"
+                        type="text"
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)} // Update city state
+                        placeholder="Enter your city"
+                    />
+                </div>
+                <div className='w-1/3 mx-4'>
+                    <Select
+                        name="state"
+                        label="State/territory"
+                        option={stateOptions}
+                        value={stateValue}
+                        onChange={(e) => setStateValue(e.target.value)} // Update stateValue
+                    />
+                </div>
+                <div className='w-1/3'>
+                    <SimpleInput
+                        label="Postcode"
+                        name="postcode"
+                        type="number"
+                        value={postcode}
+                        onChange={(e) => setPostcode(e.target.value)} // Update postcode state
+                        placeholder="Enter your postcode"
+                    />
+                </div>
+            </div>
+
+            <SimpleInput
+                label="Phone"
+                name="phone"
+                type="number"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)} // Update phone state
+                placeholder="Enter your phone number"
+            />
+
+            <button type="submit">Submit</button>
+        </form>
+    );
+};
+
+export default Address;

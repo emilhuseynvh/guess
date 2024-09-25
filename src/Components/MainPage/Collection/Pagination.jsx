@@ -28,7 +28,7 @@ const Pagination = ({ allProducts }) => {
             search: `?${queryParams.toString()}`,
         });
         window.scrollTo(0, 0)
-        window.history.replaceState(null, '', '?' + queryParams.toString());
+        window.history.pushState(null, '', '?' + queryParams.toString());
     }, [paginate, limit, navigate]);
 
     useEffect(() => {

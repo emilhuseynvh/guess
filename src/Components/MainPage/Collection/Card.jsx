@@ -8,6 +8,8 @@ const Card = ({ item }) => {
 
   const { id, name, price, discount, images, Colors, Size } = item
 
+  const [hovered, setHovered] = useState(false);
+
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -61,7 +63,7 @@ const Card = ({ item }) => {
             <FaRegHeart onClick={handleLike} className='w-5 h-5 cursor-pointer' />
           )}
         </div>
-        <img onClick={() => handleClick()} className=' select-none cursor-pointer mb-[10px] w-full' src={images[0]} alt="Image" />
+        <img onClick={() => handleClick()} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} className='select-none cursor-pointer mb-[10px] w-full' src={hovered && images[1] ? images[1] : images[0]} alt="Image"/>
         <button onClick={() => setSize(!size)} className='absolute bottom-3 right-3 text-xs px-2 bg-[#F9F9F9] border border-[#b6b6b6b3] rounded-[.375rem] h-[1.875rem]'>Add {size ? '-' : '+'}</button>
       </div>
       <div>
@@ -79,12 +81,6 @@ const Card = ({ item }) => {
             {Size.map((item, i) => <li onClick={() => handleAdd(i)} key={i} className='pr-4 cursor-pointer hover:underline'>{item}</li>)}
           </ul>
         </div>
-        {/* <div>
-          <h3>Select a color:</h3>
-          <ul className='flex flex-wrap pt-2'>
-            {Colors.map((item, i) => <li onClick={() => handleAdd(i)} key={i} style={{ background: `${item}`, border: `${item === 'WHITE' && '1px solid black'}`}}  className='pr-4 cursor-pointer mx-2 hover:underline w-6 h-6 rounded-[50%]'></li>)}
-          </ul>
-        </div> */}
       </div>
     </div>
   )

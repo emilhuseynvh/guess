@@ -4,6 +4,7 @@ import Input from './Input'
 import { IoMdClose } from "react-icons/io";
 import Benefit from './Benefit';
 import Shippping from './Shippping';
+import SimpleInput from './SimpleInput';
 
 const product = [
   {
@@ -46,7 +47,7 @@ const SummaryPanel = () => {
       {product.map((item, i) => <SummaryItem key={i} item={item} />)}
       <div className='my-4 flex items-start'>
         <div className='w-full'>
-          <Input setInputValue={setInputValue} label={'Discount code or gift card'} type={'text'} />
+          <SimpleInput setInputValue={setInputValue} label={'Discount code or gift card'} type={'text'} />
         </div>
         <button
           onClick={handleSubmit}

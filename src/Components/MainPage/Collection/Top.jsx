@@ -9,6 +9,7 @@ const Top = ({ grid, setGrid }) => {
 
     const { data: allProducts } = useGetAllProductQuery()
     const data = useSelector((state) => state.products.data);
+    
 
     const sorted = [
         {
@@ -36,7 +37,6 @@ const Top = ({ grid, setGrid }) => {
     const onHandleChange = (arg) => {
         setGrid(arg)
     }
-
     
     const handleSort = (order, sort) => {
         const queryParams = new URLSearchParams(window.location.search);
@@ -55,7 +55,6 @@ const Top = ({ grid, setGrid }) => {
     return (
         <div className='lg:flex justify-end mb-4 hidden'>
             <div className='pt-16 pb-6 w-4/5 justify-between'>
-                <h4 className='text-lg font-medium mb-[5px] '>Men's Clothing</h4>
                 <div className='flex justify-between items-center'>
                     <p className='text-xs font-light'>({data?.meta.totalProducts} styles)</p>
                     <Pagination allProducts={allProducts && allProducts} />

@@ -54,7 +54,7 @@ const Header = ({ checkout }) => {
               return (
                 <div key={i} className='group'>
                   <li key={i} className={`py-[18px] mx-3 cursor-pointer tracking-[.2em]`}>{item.name}</li>
-                  <div className='absolute w-screen left-0 h-[40vh] z-40 bg-white hidden group-hover:flex px-12'>
+                  <div className='absolute w-screen left-0 h-[40vh] z-40 bg-white hidden group-hover:flex justify-between px-24'>
                     <div>
                       <p className='cursor-pointer hover:underline text-xs font-semibold my-4'>View all</p>
                       {item.Subcategory.length > 0 && item.Subcategory.map((item, i) => {

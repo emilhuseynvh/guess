@@ -19,7 +19,7 @@ const Method = ({ item, i, checkboxCircle, setCheckboxCircle, }) => {
                     {img.map((item, i) =>  <img key={i} src={item} alt="Payment Method" /> )}
                 </div>
             </div>
-            <div className={`overflow-hidden transition-all duration-300 ease-out flex flex-col bg-lightGray justify-center  ${checkboxCircle === i ? 'max-h-[1000px] p-[1rem]' : 'max-h-0 p-0'}`}>
+            <div className={`overflow-hidden transition-all duration-300 ease-out flex flex-col bg-lightGray justify-center  ${checkboxCircle === i ? 'max-h-[1100px] p-[1rem]' : 'max-h-0 p-0'}`}>
                 {!card ? (
                     <>
                         <svg className={`${i === 1 ? 'hidden' : 'block'} h-20`} xmlns="http://www.w3.org/2000/svg" viewBox="-270.8 371 102 52"><path fill="none" stroke="#707070" strokeMiterlimit="10" strokeWidth="2" d="M-182 404v16.8c0 .7-.4 1.2-1 1.2h-75.7c-.7 0-1.2-.6-1.2-1.2v-47.6c0-.7.6-1.2 1.2-1.2h75.7c.7 0 1 .6 1 1.2V395m-78-14h78m-17 18h27m-3.9-4.6 4.5 4.6-4.5 4.6"></path><circle cx="-255.5" cy="376.5" r="1.5" fill="#707070"></circle><circle cx="-250.5" cy="376.5" r="1.5" fill="#707070"></circle><circle cx="-245.5" cy="376.5" r="1.5" fill="#707070"></circle></svg>

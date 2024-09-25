@@ -4,7 +4,7 @@ const CheckBox = ({ checkbox, setCheckbox, checkParent, setCheckParent }) => {
 
     const [check, setCheck] = useState(false)
 
-    setCheckbox && setCheckbox(check)
+    setCheckbox && setCheckbox(checkbox)
 
     return (
         <div onClick={() => setCheck(!check)} className={`${check && 'bg-black'} w-5 h-5 border flex justify-center items-center border-[#000000] cursor-pointer`}>

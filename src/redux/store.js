@@ -7,7 +7,7 @@ import productUpdateSlice from "./productUpdateSlice";
 import openReducer from "./open";
 import productFilterSlice from "./productFilterSlice";
 import subCategoryFilterSlice from "./subCategoryFilterSlice";
-import { productDetailsSlice } from "./ProductDetailsSlice";
+import  productDetailsSlice from "./ProductDetailsSlice";
 import paginationSlice from "./paginationSlice";
 import productSlice from "./productSlice";
 

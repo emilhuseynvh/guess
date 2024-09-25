@@ -52,94 +52,30 @@ const Address = () => {
 
             <div className='flex'>
                 <div className='w-1/2 mr-2'>
-                    <SimpleInput 
-                        label="First name" 
-                        name="firstName" 
-                        type="text" 
-                        value={firstName} 
-                        onChange={(e) => setFirstName(e.target.value)}
-                        placeholder="Enter your first name" 
-                    />
+                    <SimpleInput  label="First name"  name="firstName"  type="text"  value={firstName}  onChange={(e) => setFirstName(e.target.value)} placeholder="Enter your first name"  />
                 </div>
                 <div className='w-1/2 ml-2'>
-                    <SimpleInput 
-                        label="Last name" 
-                        name="lastName" 
-                        type="text" 
-                        value={lastName} 
-                        onChange={(e) => setLastName(e.target.value)}
-                        placeholder="Enter your last name" 
-                    />
+                    <SimpleInput  label="Last name"  name="lastName"  type="text"  value={lastName}  onChange={(e) => setLastName(e.target.value)} placeholder="Enter your last name"  />
                 </div>
             </div>
 
-            <SimpleInput 
-                label="Company (optional)" 
-                name="company" 
-                type="text" 
-                value={company} 
-                onChange={(e) => setCompany(e.target.value)} // Update company state
-                placeholder="Enter your company name" 
-            />
+            <SimpleInput  label="Company"  name="company"  type="text"  value={company}  onChange={(e) => setCompany(e.target.value)} placeholder="Enter your company name" />
+            <SimpleInput label="Address" name="address" type="text" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Enter your address"/>
+            <SimpleInput label="Apartment, suite, etc." name="apartment" type="text" value={apartment} onChange={(e) => setApartment(e.target.value)} placeholder="Enter apartment or suite" />
 
-            <SimpleInput
-                label="Address"
-                name="address"
-                type="text"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)} // Update address state
-                placeholder="Enter your address"
-            />
-
-            <SimpleInput
-                label="Apartment, suite, etc. (optional)"
-                name="apartment"
-                type="text"
-                value={apartment}
-                onChange={(e) => setApartment(e.target.value)} // Update apartment state
-                placeholder="Enter apartment or suite"
-            />
-
-            <div className='flex'>
+            <div className='flex items-end'>
                 <div className='w-1/3'>
-                    <SimpleInput
-                        label="City"
-                        name="city"
-                        type="text"
-                        value={city}
-                        onChange={(e) => setCity(e.target.value)} // Update city state
-                        placeholder="Enter your city"
-                    />
+                    <SimpleInput label="City" name="city" type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder="Enter your city" />
                 </div>
                 <div className='w-1/3 mx-4'>
-                    <Select
-                        name="state"
-                        label="State/territory"
-                        option={stateOptions}
-                        value={stateValue}
-                        onChange={(e) => setStateValue(e.target.value)} // Update stateValue
-                    />
+                    <Select name="state" label="State/territory" option={stateOptions} value={stateValue} onChange={(e) => setStateValue(e.target.value)} />
                 </div>
                 <div className='w-1/3'>
-                    <SimpleInput
-                        label="Postcode"
-                        name="postcode"
-                        type="number"
-                        value={postcode}
-                        onChange={(e) => setPostcode(e.target.value)} // Update postcode state
-                        placeholder="Enter your postcode"
-                    />
+                    <SimpleInput label="Postcode" name="postcode" type="number" value={postcode} onChange={(e) => setPostcode(e.target.value)} placeholder="Enter your postcode" />
                 </div>
             </div>
 
-            <SimpleInput
-                label="Phone"
-                name="phone"
-                type="number"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)} // Update phone state
-                placeholder="Enter your phone number"
-            />
+            <SimpleInput label="Phone" name="phone" type="number" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Enter your phone number" />
 
             <button type="submit">Submit</button>
         </form>

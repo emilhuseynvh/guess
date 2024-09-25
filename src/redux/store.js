@@ -7,7 +7,6 @@ import productUpdateSlice from "./productUpdateSlice";
 import openReducer from "./open";
 import productFilterSlice from "./productFilterSlice";
 import subCategoryFilterSlice from "./subCategoryFilterSlice";
-import  productDetailsSlice from "./ProductDetailsSlice";
 import paginationSlice from "./paginationSlice";
 import productSlice from "./productSlice";
 
@@ -22,7 +21,6 @@ export const store = configureStore({
         productFilter: productFilterSlice,
         subCategoryFilter: subCategoryFilterSlice,
         subcategory: subCategorySlice,
-        productDetails: productDetailsSlice.reducer,
         pagination: paginationSlice,
         products: productSlice
     },

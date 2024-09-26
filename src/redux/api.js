@@ -84,7 +84,7 @@ export const guessApi = createApi({
                 },
                 body: JSON.stringify({ name, slug, categoryId })
             }),
-            invalidatesTags: ['Category'],
+            invalidatesTags: ['Categories'],
         }),
         updateSubCategory: builder.mutation({
             query: ({ name, slug, id, categoryId }) => ({

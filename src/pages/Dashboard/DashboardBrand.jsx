@@ -100,7 +100,6 @@ const DashboardBrand = () => {
             <div style={{ boxShadow: '0px 2px 1px -1px rgba(255, 255, 255, 0.05)' }} className='w-[100%] rounded-lg  px-8 bg-dashboardSecondary h-[572px] my-8'>
                 <div className='w-full pt-4 pb-2 pr-4 pl-4 flex justify-between'>
                     <p className='text-base font-medium'>All Brands</p>
-                    <input style={{ transition: 'border-color .15s ease-in-out, box-shadow .15s ease-in-out' }} className='focus:border-dashboardBtn outline-none bg-transparent border border-dashboardBorder text-[.8rem] py-1 px-[.8rem] rounded' placeholder='Search' type="text" />
                 </div>
                 <div className='flex justify-between bg-white text-black py-1.5 px-2 my-4'>
                     <p>Category ID</p>

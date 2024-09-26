@@ -24,7 +24,7 @@ const BrandModal = ({ inputDetails, handleSubmit, isEdit }) => {
           );
         })}
         <div onClick={() => handleSubmit()} className='w-full mt-8'>
-          <BrandButton name={isEdit ? 'Update Brand' : 'Create Brand'} />
+          <BrandButton name={'Submit'} />
         </div>
       </div>
     </div>

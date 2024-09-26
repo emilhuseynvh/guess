@@ -17,7 +17,7 @@ const Header = ({ checkout }) => {
   const [showHamburger, setShowHamburger] = useState(false)
   const [closeSearch, setCloseSearch] = useState(false)
   const [input, setInput] = useState()
-
+  const like = useSelector((state) => state.like.like);
 
   const navigate = useNavigate();
 
@@ -114,7 +114,10 @@ const Header = ({ checkout }) => {
             </div>
             <svg onClick={() => setSearch(!search)} aria-hidden="true" focusable="false" role="presentation" className={`${checkout ? 'hidden' : 'block'} mr-3 icon icon-search icon--stroke-based cursor-pointer`} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.6708 17.3415C14.3549 17.3415 17.3415 14.3549 17.3415 10.6708C17.3415 6.98661 14.3549 4 10.6708 4C6.98661 4 4 6.98661 4 10.6708C4 14.3549 6.98661 17.3415 10.6708 17.3415Z" stroke="black" strokeWidth="1.71429" strokeLinecap="round" strokeLinejoin="round"></path><path d="M20.0008 20L15.3854 15.3846" stroke="black" strokeWidth="1.71429" strokeLinecap="round" strokeLinejoin="round"></path></svg>
           </div>
-          <svg onClick={() => navigate('/wishlist')} aria-hidden="true" focusable="false" role="presentation" className={`${checkout ? 'hidden' : 'block'} mr-3 icon icon-heart icon--stroke-based cursor-pointer`} data-modal-type="show-list-selection" data-variant-id="" data-product-id="" data-product-url="https://guess.com.au" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.0057 19.5216L4.36699 12.6025C0.21554 8.45103 6.31817 0.48025 12.0057 6.92884C17.6931 0.48025 23.7681 8.47871 19.6443 12.6025L12.0057 19.5216Z" stroke="black" strokeWidth="1.71429" strokeLinecap="round" strokeLinejoin="round" className="" data-modal-type="show-list-selection" data-variant-id="" data-product-id="" data-product-url="https://guess.com.au"></path></svg>
+          <div onClick={() => navigate('/wishlist')} className='flex items-center mr-3'>
+            <svg aria-hidden="true" focusable="false" role="presentation" className={`${checkout ? 'hidden' : 'block'} icon icon-heart icon--stroke-based cursor-pointer`} data-modal-type="show-list-selection" data-variant-id="" data-product-id="" data-product-url="https://guess.com.au" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.0057 19.5216L4.36699 12.6025C0.21554 8.45103 6.31817 0.48025 12.0057 6.92884C17.6931 0.48025 23.7681 8.47871 19.6443 12.6025L12.0057 19.5216Z" stroke="black" strokeWidth="1.71429" strokeLinecap="round" strokeLinejoin="round" className="" data-modal-type="show-list-selection" data-variant-id="" data-product-id="" data-product-url="https://guess.com.au"></path></svg>
+            <p className='text-xs font-light ml-[3.5px] select-none'>{like}</p>
+          </div>
           <div className='md:relative'>
             <button onClick={() => handleClick()} className='mr-3 flex items-center'>
               <svg aria-hidden="true" focusable="false" role="presentation" className="icon icon-cart icon--stroke-based" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19.492 18.8997C19.5121 19.0785 19.4941 19.2595 19.4392 19.4308C19.3843 19.6021 19.2937 19.7598 19.1735 19.8936C19.0529 20.0272 18.9055 20.1337 18.7407 20.2062C18.576 20.2786 18.3978 20.3154 18.2179 20.314H5.78211C5.60216 20.3154 5.42397 20.2786 5.25926 20.2062C5.09455 20.1337 4.94705 20.0272 4.82649 19.8936C4.70625 19.7598 4.6157 19.6021 4.5608 19.4308C4.5059 19.2595 4.48789 19.0785 4.50795 18.8997L5.62921 8.84662H18.3708L19.492 18.8997Z" stroke="black" strokeWidth="1.71429" strokeLinecap="round" strokeLinejoin="round"></path><path d="M8.81458 8.84663V6.93539C8.81458 6.09057 9.15018 5.28036 9.74756 4.68298C10.3449 4.0856 11.1552 3.75 12 3.75C12.8448 3.75 13.655 4.0856 14.2524 4.68298C14.8498 5.28036 15.1854 6.09057 15.1854 6.93539V8.84663" stroke="black" strokeWidth="1.71429" strokeLinecap="round" strokeLinejoin="round"></path></svg>

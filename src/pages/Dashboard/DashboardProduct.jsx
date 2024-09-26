@@ -10,6 +10,7 @@ import CreateProduct from '../../Components/Dashboard/DashboardProduct/CreatePro
 import UpdateProduct from '../../Components/Dashboard/DashboardProduct/UpdateProduct'
 import BrandButton from '../../Components/Dashboard/DashboardButton'
 import Loader from '../../Components/MainPage/Loader'
+import NoDataIcon from '../../Components/MainPage/NoDataIcon'
 
 const DashboardProduct = () => {
   const dispatch = useDispatch()
@@ -62,7 +63,9 @@ const DashboardProduct = () => {
               searchData.length > 0 ? (
                 searchData.map((item, i) => <DashboardTable key={i} item={item} />)
               ) : (
-                <p>Not found</p>
+                <div className='flex justify-center'>
+                  <NoDataIcon />
+                </div>
               )
             ) : (
               allProducts?.data?.map((item, i) => <DashboardTable key={i} item={item} />)

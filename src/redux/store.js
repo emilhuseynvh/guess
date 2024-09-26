@@ -9,6 +9,7 @@ import productFilterSlice from "./productFilterSlice";
 import subCategoryFilterSlice from "./subCategoryFilterSlice";
 import paginationSlice from "./paginationSlice";
 import productSlice from "./productSlice";
+import LikeSlice from "./LikeSlice";
 
 export const store = configureStore({
     reducer: {
@@ -22,7 +23,8 @@ export const store = configureStore({
         subCategoryFilter: subCategoryFilterSlice,
         subcategory: subCategorySlice,
         pagination: paginationSlice,
-        products: productSlice
+        products: productSlice,
+        like: LikeSlice
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(guessApi.middleware)
 });

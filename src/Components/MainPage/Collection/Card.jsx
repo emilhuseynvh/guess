@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { FaHeart, FaRegHeart } from "react-icons/fa6";
 import { useAddToCartMutation } from '../../../redux/api';
+import { setLike } from '../../../redux/LikeSlice';
 
 const Card = ({ item }) => {
 
@@ -33,15 +34,24 @@ const Card = ({ item }) => {
     addToCart({ productId: id, color: Colors[0], size: Size[index] })
   }
 
+  const like = useSelector((state) => state.like.like);
+  
+  useEffect(() => {
+    const likedItems = JSON.parse(localStorage.getItem('likedItems')) || []
+    dispatch(setLike(likedItems.length))
+  }, [])
+
 
   const handleLike = () => {
     let likedItems = JSON.parse(localStorage.getItem('likedItems')) || [];
     let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
 
     if (liked) {
+      dispatch(setLike(like - 1))
       likedItems = likedItems.filter(itemId => itemId !== id);
       wishlist = wishlist.filter(wishlistItem => wishlistItem.id !== id);
     } else {
+      dispatch(setLike(like + 1))
       likedItems.push(id);
       wishlist.push(item);
     }

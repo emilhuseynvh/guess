@@ -45,7 +45,7 @@ const WislistElement = ({ item, i, noData, setNoData }) => {
         <img onClick={() => handleNavigate()} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} className='select-none cursor-pointer mb-[10px] w-full' src={hovered && images[1] ? images[1] : images[0]} alt="Image" />
         <h2 className='mt-1 '>{name}</h2>
         <p className='mt-1 text-sm'>{description.length > 50 ? description.slice(0, 50) + '...' : description}</p>
-        <div className='flex items-center gap-2 justify-between'>
+        <div className='xs:flex items-center gap-2 justify-between'>
           <div className='flex gap-1 items-center'>
             <p className={`${discount && 'line-through text-gray-500'} text-sm`}>{price}</p>
             <p className={`${discount ? 'block' : 'hidden'} text-base text-red-500`}>{discount}</p>

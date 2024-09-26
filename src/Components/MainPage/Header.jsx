@@ -7,6 +7,7 @@ import { useGetAllCategoriesQuery, useGetCartQuery, useGetProductBySubcategoryId
 import { useDispatch, useSelector } from 'react-redux';
 import HamburgerMenu from './HamburgerMenu';
 import { MdClose } from 'react-icons/md';
+import Loader from './Loader';
 
 const Header = ({ checkout }) => {
   const listImage = ['assets/img/header-list1.webp', 'assets/img/header-list2.webp', 'assets/img/header-list4.webp', 'assets/img/header-list3.webp',]
@@ -20,7 +21,7 @@ const Header = ({ checkout }) => {
 
   const navigate = useNavigate();
 
-  const { data: allCategories } = useGetAllCategoriesQuery();
+  const { data: allCategories, isLoading: caregoryLoader } = useGetAllCategoriesQuery();
   const { data: products, error, isLoading } = useGetCartQuery();
   const [inputValue, { data: searchData, error: searchError }] = useSearchProductByInputMutation()
 
@@ -44,7 +45,9 @@ const Header = ({ checkout }) => {
     token ? setCart(!cart) : navigate('/login')
   }
 
-  return (
+  return caregoryLoader ? (
+    <Loader />
+  ) : (
     <header className={`${showHamburger && 'fixed inset-0 bg-white z-50'} border-b-2 border-[#eee]`}>
       <div className={`flex ${checkout ? 'w-[80%]' : 'w-[95%]'} mx-auto h-[58px] items-center justify-between`}>
         <div className='flex items-center'>
@@ -62,7 +65,7 @@ const Header = ({ checkout }) => {
                       })}
                     </div>
                     <div className='w-96 h-96 ml-40'>
-                      <img src={`./../../../../public/assets/img/header-list${i + 1}.webp`} alt="Category Image" />
+                      <img src={`./../../../../assets/img/header-list${i + 1}.webp`} alt="Category Image" />
                     </div>
                   </div>
                 </div>

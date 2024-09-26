@@ -3,11 +3,12 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 const Img = ({ product }) => {
-    console.log(product);
-    
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const handleResize = () => {
@@ -17,6 +18,13 @@ const Img = ({ product }) => {
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
+
+    // Məlumatlar yüklənəndə loading-i false olaraq təyin et
+    useEffect(() => {
+        if (product?.images?.length) {
+            setLoading(false);
+        }
+    }, [product]);
 
     const settings = {
         infinite: true,
@@ -31,18 +39,29 @@ const Img = ({ product }) => {
 
     return (
         <>
-            {product?.images.map((img, i) => (
-                <img className='lg:block hidden' key={i} src={img} alt="Image" />
-            ))}
+            {loading ? (
+                // Skeleton ilə loading halı
+                <div className='lg:block hidden'>
+                    <Skeleton width={600} height={400} />
+                </div>
+            ) : (
+                product?.images.map((img, i) => (
+                    <img className='lg:block hidden' key={i} src={img} alt="Image" />
+                ))
+            )}
 
             <div className="slider-container w-full block lg:hidden">
-                <Slider {...settings}>
-                    {product?.images.map((item, i) => (
-                        <div key={i}>
-                            <img src={item} alt={`Slide ${i + 1}`} />
-                        </div>
-                    ))}
-                </Slider>
+                {loading ? (
+                    <Skeleton height={300} count={1} />
+                ) : (
+                    <Slider {...settings}>
+                        {product?.images.map((item, i) => (
+                            <div key={i}>
+                                <img src={item} alt={`Slide ${i + 1}`} />
+                            </div>
+                        ))}
+                    </Slider>
+                )}
             </div>
         </>
     );
@@ -71,4 +90,5 @@ const PrevArrow = (props) => {
 };
 
 export default Img;
+
 

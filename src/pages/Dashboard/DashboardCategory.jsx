@@ -8,6 +8,7 @@ import BrandButton from '../../Components/Dashboard/DashboardButton';
 import BrandModal from '../../Components/Dashboard/DashboardModal';
 import DashboardTable from '../../Components/Dashboard/DashboardTable';
 import SubCategoryModal from '../../Components/Dashboard/SubCategory/SubCategoryModal';
+import Loader from '../../Components/MainPage/Loader';
 
 const DashboardCategory = () => {
     const dispatch = useDispatch();
@@ -17,7 +18,7 @@ const DashboardCategory = () => {
 
     const [category, setCategory] = useState(true)
 
-    const { data: allCategories } = useGetAllCategoriesQuery();
+    const { data: allCategories, isLoading } = useGetAllCategoriesQuery();
 
     const [createCategory, { data: createData, error: createError, isSuccess: createSuccess, isError: createIsError }] = useCreateCategoryMutation();
     const [updateCategory, { data: updateData, error: updateError, isSuccess: updateSuccess, isError: updateIsError }] = useUpdateCategoryMutation();
@@ -92,7 +93,9 @@ const DashboardCategory = () => {
         dispatch(setOpen());
     };
 
-    return (
+    return isLoading ? (
+        <Loader admin={true} />
+    ) : (
         <div className='bg-dashboardPrimary w-[99vw] h-screen py-4 px-8 text-white'>
             <div className='flex justify-end'>
                 <div onClick={() => { setName(''); setSlug(''); setSelectedCategory(null); dispatch(setOpen()); }}>

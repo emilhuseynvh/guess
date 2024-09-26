@@ -9,6 +9,7 @@ import { useGetAllProductQuery, useSearchProductsQuery } from '../../redux/api';
 import Pagination from '../../Components/MainPage/Collection/Pagination';
 import { useDispatch } from 'react-redux';
 import { setData } from '../../redux/productSlice';
+import Loader from '../../Components/MainPage/Loader';
 
 const Collection = () => {
   const localGrid = localStorage.getItem('grid');
@@ -58,7 +59,7 @@ const Collection = () => {
         </div>
         <div className={`lg:w-4/5 w-full gap-4 grid grid-cols-${grid}`}>
           {!data ? (
-            <p>Yüklənir...</p>
+            <Loader />
           ) : (
             data?.data?.map((item, i) => (
               <div key={i}>

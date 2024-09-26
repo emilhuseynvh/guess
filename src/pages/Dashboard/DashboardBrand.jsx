@@ -7,12 +7,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setOpen } from '../../redux/open';
 import toast from 'react-hot-toast';
 import BrandButton from '../../Components/Dashboard/DashboardButton';
+import Loader from '../../Components/MainPage/Loader';
 
 const DashboardBrand = () => {
     const dispatch = useDispatch();
     const { open } = useSelector((state) => state.open);
 
-    const { data: allBrands } = useGetAllBrandsQuery();
+    const { data: allBrands, isLoading } = useGetAllBrandsQuery();
     console.log(allBrands);
 
     const [createBrand, { data: createData, error: createError, isSuccess: createSuccess, isError: createIsError }] = useCreateBrandMutation();
@@ -87,7 +88,9 @@ const DashboardBrand = () => {
         dispatch(setOpen());
     };
 
-    return (
+    return isLoading ? (
+        <Loader admin={true} />
+    ) : (
         <div className='bg-dashboardPrimary w-[99vw] h-screen py-4 px-8 text-white'>
             <div className='flex justify-end'>
                 <div onClick={() => { setName(''); setSlug(''); setSelectedBrand(null); dispatch(setOpen());}}>

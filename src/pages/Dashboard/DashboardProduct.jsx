@@ -9,6 +9,7 @@ import { useGetAllProductQuery, useSearchProductByInputMutation } from '../../re
 import CreateProduct from '../../Components/Dashboard/DashboardProduct/CreateProduct'
 import UpdateProduct from '../../Components/Dashboard/DashboardProduct/UpdateProduct'
 import BrandButton from '../../Components/Dashboard/DashboardButton'
+import Loader from '../../Components/MainPage/Loader'
 
 const DashboardProduct = () => {
   const dispatch = useDispatch()
@@ -17,7 +18,7 @@ const DashboardProduct = () => {
 
 
 
-  const { data: allProducts, error } = useGetAllProductQuery()
+  const { data: allProducts, error, isLoading } = useGetAllProductQuery()
   const [inputValue, { data: searchData, error: searchError }] = useSearchProductByInputMutation()
   console.log(searchData, searchError);
 
@@ -29,7 +30,9 @@ const DashboardProduct = () => {
   console.log('salam');
 
 
-  return (
+  return isLoading ? (
+    <Loader admin={true} />
+  ) : (
     <div className='bg-dashboardPrimary w-[99vw] h-screen py-4 px-8 text-white'>
       <div className='flex justify-end'>
         <div onClick={() => dispatch(setCreateProduct())}>

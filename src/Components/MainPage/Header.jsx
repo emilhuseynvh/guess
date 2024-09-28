@@ -22,7 +22,7 @@ const Header = ({ checkout }) => {
   const navigate = useNavigate();
 
   const { data: allCategories, isLoading: caregoryLoader } = useGetAllCategoriesQuery();
-  const { data: products, error, isLoading } = useGetCartQuery();
+  const { data: products } = useGetCartQuery();
   const [inputValue, { data: searchData, error: searchError }] = useSearchProductByInputMutation()
 
   useEffect(() => {

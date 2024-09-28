@@ -10,6 +10,7 @@ import Pagination from '../../Components/MainPage/Collection/Pagination';
 import { useDispatch } from 'react-redux';
 import { setData } from '../../redux/productSlice';
 import Loader from '../../Components/MainPage/Loader';
+import { Helmet } from 'react-helmet-async';
 
 const Collection = () => {
   const localGrid = localStorage.getItem('grid');
@@ -41,6 +42,8 @@ const Collection = () => {
 
   const { data } = useSearchProductsQuery(params);
   const { data: allProducts } = useGetAllProductQuery();
+  console.log(data);
+  
 
   useEffect(() => {
     if (data) {
@@ -50,6 +53,9 @@ const Collection = () => {
 
   return (
     <div className='w-[95%] mx-auto py-7'>
+      <Helmet>
+        <title>{params?.includes('subcategoryId') ?  data?.data[0].subcategory.name : data?.data[0].category.name}</title>
+      </Helmet>
       <BreadCrumbs />
       <Top grid={grid} setGrid={setGrid} />
       <TopMobile />

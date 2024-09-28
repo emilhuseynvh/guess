@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
 import { useLoginMutation } from '../../redux/api';
 import { ToastContainer, toast } from 'react-toastify';
+import { Helmet } from 'react-helmet-async';
 
 
 const validationSchema = Yup.object({
@@ -16,8 +17,7 @@ const Login = () => {
   const navigate = useNavigate()
 
   function handleLoginResponse(response, values) {
-    console.log(response);
-    
+
     if (response.data) {
       localStorage.setItem('username', values.username)
       localStorage.setItem('token', response.data.token)
@@ -29,13 +29,16 @@ const Login = () => {
     }
   }
 
-  const [userLogin, {data, error}] = useLoginMutation();
+  const [userLogin, { data, error }] = useLoginMutation();
   console.log(data, error);
-  
+
   const notify = (arg) => toast.error(arg);
 
   return (
     <div className='flex justify-center w-[95%] mx-auto'>
+      <Helmet>
+        <title>Login</title>
+      </Helmet>
       <div className='w-full md:w-1/2 my-8'>
         <h2 className='text-lg font-semibold mb-[15px]'>Login</h2>
         <p className='text-sm font-medium mb-[10px]'>Please enter your email and password here.</p>

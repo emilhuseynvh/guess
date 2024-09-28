@@ -1,50 +1,77 @@
 import React, { useState } from 'react';
 import CheckBox from './Checkout/CheckBox';
-
-const footer = [
-  {
-    title: 'My Account',
-    list: [
-      'Sign-in',
-      'Register',
-      'Order history',
-      'UNiDAYS'
-    ]
-  },
-  {
-    title: 'Customer Care',
-    list: [
-      'FAQs',
-      'Returns',
-      'Shipping',
-      'Size Charts',
-      'Gift Cards',
-      'Store Locator',
-      'Terms and Conditions',
-      'Privacy Policy',
-      'Contact Us'
-    ]
-  },
-  {
-    title: 'Our Company',
-    list: [
-      'Our Story',
-      'Sustainability'
-    ]
-  },
-  {
-    title: 'Brands',
-    list: [
-      'GUESS',
-      'Kids',
-      'Marciano',
-      'GUESS JEANS'
-    ]
-  }
-]
+import { useNavigate } from 'react-router-dom';
 
 
 const Footer = () => {
+
+  const token = localStorage.getItem('token')
+  const navigate = useNavigate()
+  const footer = [
+    {
+      title: 'My Account',
+      list: [
+        {
+          name: 'Sign-in',
+          link: token ? '/account' : '/login'
+        },
+        {
+          name: 'Register',
+          link: token ? '/account' : '/register'
+        },
+        {
+          name: 'Account',
+          link: '/account'
+        },
+        {
+          name: 'UNiDAYS',
+          link: '/'
+        }
+      ]
+    },
+    {
+      title: 'Customer Care',
+      list: [
+        'FAQs',
+        'Returns',
+        'Shipping',
+        'Size Charts',
+        'Gift Cards',
+        'Store Locator',
+        'Terms and Conditions',
+        'Privacy Policy',
+        'Contact Us'
+      ]
+    },
+    {
+      title: 'Our Company',
+      list: [
+        'Our Story',
+        'Sustainability'
+      ]
+    },
+    {
+      title: 'Brand',
+      list: [
+        {
+          name: 'GUESS',
+          id: 1,
+        },
+        {
+          name: 'Kids',
+          id: 2
+        },
+        {
+          name: 'Marciano',
+          id: 3
+        },
+        {
+          name: 'GUESS JEANS',
+          id: 4
+        }
+      ]
+    }
+  ]
 
   const [checkbox, setCheckbox] = useState()
   const [flag, setFlag] = useState(null)
@@ -58,13 +85,16 @@ const Footer = () => {
 
           return (
             <div key={index} className='base:w-full'>
-              <div onClick={() => setFlag(flag === index ? null : index )} className='flex justify-between items-center cursor-pointer base:cursor-default'>
-              <h4 className="text-base font-semibold mb-4">{title}</h4>
-              <svg aria-hidden="true" className={`${flag === index ? 'rotate-90' : ' rotate-0'} duration-300 base:hidden block`} width="16" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.4.571 8.43 7.6a.549.549 0 0 1 0 .8L1.4 15.429" stroke="#000" strokeWidth="1.714" strokeLinecap="round" strokeLinejoin="round"></path></svg>
+              <div onClick={() => setFlag(flag === index ? null : index)} className='flex justify-between items-center cursor-pointer base:cursor-default'>
+                <h4 className="text-base font-semibold mb-4">{title}</h4>
+                <svg aria-hidden="true" className={`${flag === index ? 'rotate-90' : ' rotate-0'} duration-300 base:hidden block`} width="16" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.4.571 8.43 7.6a.549.549 0 0 1 0 .8L1.4 15.429" stroke="#000" strokeWidth="1.714" strokeLinecap="round" strokeLinejoin="round"></path></svg>
               </div>
-              <ul className={`${flag === index ? 'max-h-[500px]' : 'max-h-0'} transition-all duration-300 base:max-h-[500px] overflow-hidden  space-y-2 mb-6`}>
-                {list.map((l, i) => <li  key={i}><a href="#" className="text-gray-700 text-sm hover:underline cursor-pointer">{l}</a></li>)}
+              <ul className={`${flag === index ? 'max-h-[500px]' : 'max-h-0'} transition-all duration-300 base:max-h-[500px] overflow-hidden space-y-2 mb-6`}>
+                {list.map((l, i) => (
+                  <li key={i} onClick={() => navigate(l.link ? l.link : { pathname: '/products/all', search: `?brandId=${l.id}` })}><span className="text-gray-700 text-sm hover:underline cursor-pointer">{l.name ? l.name : l}</span></li>
+                ))}
               </ul>
+
             </div>
           )
         })}

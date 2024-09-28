@@ -4,6 +4,7 @@ import Info from '../../Components/MainPage/Details/Info';
 import { useGetProductByIdMutation } from '../../redux/api';
 import { useParams } from 'react-router-dom';
 import Loader from '../../Components/MainPage/Loader';
+import { Helmet } from 'react-helmet-async';
 
 const Details = () => {
     const { id } = useParams();
@@ -15,6 +16,9 @@ const Details = () => {
 
     return (
         <div className='w-[95%] mx-auto my-6 md:flex'>
+            <Helmet>
+                <title>{productDetails?.name}</title>
+            </Helmet>
             {isLoading ? (
                 <Loader />
             ) : productDetails ? (

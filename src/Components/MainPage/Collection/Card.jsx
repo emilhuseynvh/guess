@@ -35,11 +35,6 @@ const Card = ({ item }) => {
   }
 
   const like = useSelector((state) => state.like.like);
-  
-  useEffect(() => {
-    const likedItems = JSON.parse(localStorage.getItem('likedItems')) || []
-    dispatch(setLike(likedItems.length))
-  }, [])
 
 
   const handleLike = () => {

@@ -4,6 +4,7 @@ import MiniCartElement from '../../Components/MainPage/Cart/MiniCartElement'
 import CartBottom from '../../Components/MainPage/Cart/CartBottom'
 import BreadCrumbs from '../../Components/MainPage/BreadCrumbs'
 import { useGetCartQuery } from '../../redux/api'
+import { Helmet } from 'react-helmet-async'
 
 
 const Cart = () => {
@@ -11,6 +12,9 @@ const Cart = () => {
     const { data: products, error, isLoading } = useGetCartQuery();
     return (
         <div className='w-[95%] mx-auto'>
+            <Helmet>
+                <title>Cart</title>
+            </Helmet>
             <div className='mt-6 mb-8'>
                 <BreadCrumbs />
             </div>

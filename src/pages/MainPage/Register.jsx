@@ -7,6 +7,7 @@ import { eGender } from './../../enum/enumData'
 import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+import { Helmet } from 'react-helmet-async';
 
 
 const input = [
@@ -88,6 +89,9 @@ const Register = () => {
   return (
 
     <div className='w-[95%] mx-auto flex justify-center pt-8'>
+      <Helmet>
+        <title>Register</title>
+      </Helmet>
       <ToastContainer />
       <div className='w-full md:w-1/2'>
         <h2 className='text-2xl font-semibold mb-[15px]'>Register</h2>

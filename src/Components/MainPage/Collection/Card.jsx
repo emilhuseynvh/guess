@@ -73,9 +73,9 @@ const Card = ({ item }) => {
       </div>
       <div>
         <h4 className='font-semibold text-sm leading-[1.5] mb-[5px]'>{name}</h4>
-        <div className='flex items-center'>
+        <div className='flex items-start gap-2'>
           <p className={`${discount && 'line-through'} text-gray-400 font-normal text-sm mb-[10px]`}>$ {price}</p>
-          <p className={discount ? 'block' : 'hidden'}>{discount && Math.floor(price - (price / 100 * discount))}</p>
+          <p className={`${discount ? 'block' : 'hidden'}`}>{discount && Math.floor(price - (price / 100 * discount))}</p>
         </div>
         <p className='text-[#ee3a43] text-sm font-normal'>25% Off With Code APASNI</p>
       </div>

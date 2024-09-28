@@ -8,7 +8,7 @@ import BrandButton from '../DashboardButton';
 import { setSubCategory } from '../../../redux/subCategorySlice';
 import { setOpen } from '../../../redux/open';
 import BrandModal from '../DashboardModal';
-import { useCreateSubCategoryMutation, useDeleteSubCategoryMutation, useGetCategoryByIdMutation, useUpdateSubCategoryMutation } from '../../../redux/api';
+import { useCreateSubCategoryMutation, useDeleteSubCategoryMutation, useGetCategoryByIdQuery, useUpdateSubCategoryMutation } from '../../../redux/api';
 
 const SubcategoryModal = ({ onClose }) => {
     const dispatch = useDispatch();
@@ -18,9 +18,9 @@ const SubcategoryModal = ({ onClose }) => {
 
     const [name, setName] = useState('');
     const [slug, setSlug] = useState('');
+    const [categoryId, setCategoryId] = useState('')
     const [selectedSubcategory, setSelectedSubcategory] = useState(null);
 
-    const [categoryId, { data: CategoryById, isLoading }] = useGetCategoryByIdMutation();
     const [createSubcategory, { isSuccess: createSuccess, error: createErrorData, isError: createError }] = useCreateSubCategoryMutation();
 
     const [updateSubcategory, { isSuccess: updateSuccess, isError: updateError, error: updateErrorData }] = useUpdateSubCategoryMutation();
@@ -43,9 +43,10 @@ const SubcategoryModal = ({ onClose }) => {
         },
     ];
 
+    const { data: CategoryById, isLoading, refetch } = useGetCategoryByIdQuery(categoryId && categoryId);
     useEffect(() => {
         if (subCategory) {
-            categoryId(subCategory);
+            setCategoryId(subCategory);
         }
     }, [subCategory, categoryId]);
 
@@ -56,6 +57,7 @@ const SubcategoryModal = ({ onClose }) => {
             setSlug('');
             setSelectedSubcategory(null);
             dispatch(setOpen())
+            refetch()
         }
         else if (createError) {
             toast.error(createErrorData || 'Error')
@@ -65,11 +67,14 @@ const SubcategoryModal = ({ onClose }) => {
     useEffect(() => {
         deleteSuccess && toast.success('Subcategory deleted succesfully')
         deleteError && toast.error(deleteErrorData || 'Error')
+        refetch()
     }, [deleteSuccess, deleteError])
     useEffect(() => {
         if (updateSuccess) {
             dispatch(setOpen())
             toast.success('Subcategory updated successfully')
+            refetch()
+
         }
         else if (updateError) {
             toast.error(updateErrorData || 'Error')

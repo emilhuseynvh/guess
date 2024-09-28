@@ -56,10 +56,9 @@ export const guessApi = createApi({
             }),
             invalidatesTags: ['Categories'],
         }),
-        getCategoryById: builder.mutation({
+        getCategoryById: builder.query({
             query: (id) => ({
                 url: `/categories/get/${id}`,
-                method: 'GET'
             })
         }),
         updateCategory: builder.mutation({
@@ -302,7 +301,7 @@ export const {
     useGetAllCategoriesQuery,
     useCreateCategoryMutation,
     useDeleteCategoryMutation,
-    useGetCategoryByIdMutation,
+    useGetCategoryByIdQuery,
     useUpdateCategoryMutation,
     useCreateSubCategoryMutation,
     useGetAllBrandsQuery,

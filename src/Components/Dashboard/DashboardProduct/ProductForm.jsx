@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useUploadImgMutation, useGetCategoryByIdMutation, useGetAllCategoriesQuery, useGetAllBrandsQuery } from '../../../redux/api';
+import { useUploadImgMutation, useGetAllCategoriesQuery, useGetAllBrandsQuery, useGetCategoryByIdQuery } from '../../../redux/api';
 import DashboardInput from '../DashboardInput';
 import DashboardSelect from './DashboardSelect';
 import FileUpload from './FileUpload';
@@ -11,14 +11,14 @@ import { eSize, eColor } from '../../../enum/enumData';
 const ProductForm = ({ initialValues, onSubmit }) => {
     console.log(initialValues);
 
-
+    const [id, setId] = useState()
 
 
 
     const dispatch = useDispatch();
     const [sendFormData, { data, error }] = useUploadImgMutation();
 
-    const [id, { data: categoryByID }] = useGetCategoryByIdMutation();
+    const  { data: categoryByID } = useGetCategoryByIdQuery(id && id);
     const { data: allCategories } = useGetAllCategoriesQuery();
     const { data: allBrands } = useGetAllBrandsQuery();
 
@@ -41,7 +41,7 @@ const ProductForm = ({ initialValues, onSubmit }) => {
     }, [initialValues]);
 
     useEffect(() => {
-        productCategory && id(productCategory);
+        productCategory && setId(productCategory);
     }, [productCategory, id]);
 
 

@@ -66,7 +66,7 @@ const TopMobile = () => {
 
     return (
         <>
-            <div className='w-full md:hidden flex my-4'>
+            <div className='w-full lg:hidden flex my-4'>
                 <div onClick={() => setSort(!sort)} className='w-1/2 flex items-center border border-y-[#d9d9d9] py-2 px-4 cursor-pointer'>
                     <p className='mr-2 text-base'>Sort by  </p>
                     <svg aria-hidden="true" focusable="false" role="presentation" className="icon icon-chevron icon--small icon--stroke-based h-[10px] w-[10px] rotate-90 cursor-pointer" width={16} height={16} viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M1.40039 0.571442L8.42896 7.60001C8.48363 7.65132 8.52719 7.71328 8.55698 7.78208C8.58676 7.85087 8.60213 7.92505 8.60213 8.00001C8.60213 8.07498 8.58676 8.14915 8.55698 8.21795C8.52719 8.28675 8.48363 8.34871 8.42896 8.40001L1.40039 15.4286" stroke="black" strokeWidth="1.71429" strokeLinecap="round" strokeLinejoin="round"></path></svg>

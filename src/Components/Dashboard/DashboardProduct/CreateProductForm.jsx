@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useUploadImgMutation, useGetCategoryByIdMutation, useGetAllCategoriesQuery, useGetAllBrandsQuery } from '../../../redux/api';
+import { useUploadImgMutation, useGetAllCategoriesQuery, useGetAllBrandsQuery, useGetCategoryByIdQuery } from '../../../redux/api';
 import DashboardInput from '../DashboardInput';
 import DashboardSelect from './DashboardSelect';
 import DashboardButton from '../DashboardButton';
@@ -11,8 +11,9 @@ import CreateFileUpload from './CreateFIleUpload';
 const CreateProductForm = ({ onSubmit }) => {
     const dispatch = useDispatch();
     const [sendFormData] = useUploadImgMutation();
+    const [id, setId] = useState()
 
-    const [id, { data: categoryByID }] = useGetCategoryByIdMutation();
+    const  { data: categoryByID } = useGetCategoryByIdQuery(id && id);
     const { data: allCategories } = useGetAllCategoriesQuery();
     const { data: allBrands } = useGetAllBrandsQuery();
 
@@ -28,7 +29,7 @@ const CreateProductForm = ({ onSubmit }) => {
     const [uploadedFiles, setUploadedFiles] = useState([]);
 
     useEffect(() => {
-        productCategory && id(productCategory);
+        productCategory && setId(productCategory);
     }, [productCategory, id]);
 
     const handleSelectChange = (event, setFunction) => {
@@ -157,7 +158,7 @@ const CreateProductForm = ({ onSubmit }) => {
             <div className='px-4 mt-6 w-full'>
                 <CreateFileUpload files={uploadedFiles} onRemove={handleRemove} onchange={handleChange} />
             </div>
-            <div onClick={() => handleSubmit()}>
+            <div onClick={() => handleSubmit()} className='mt-4'>
                 <DashboardButton name='Create Product' />
             </div>
         </div>

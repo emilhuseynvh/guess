@@ -36,9 +36,14 @@ const Header = ({ checkout }) => {
   }, [input])
 
 
-  const handleFilter = (id) => {
+  const handleSubcategoryFilter = (id) => {
     navigate({ pathname: '/products/all', search: `?subcategoryId=${id}`, })
   };
+
+  const handleCategoryFilter = (id) => {
+    navigate({ pathname: '/products/all', search: `?categoryId=${id}`, })
+  };
+
 
   const handleClick = () => {
     const token = localStorage.getItem('token')
@@ -59,9 +64,9 @@ const Header = ({ checkout }) => {
                   <li key={i} className={`py-[18px] mx-3 cursor-pointer tracking-[.2em]`}>{item.name}</li>
                   <div className='absolute w-screen left-0 h-[40vh] z-40 bg-white hidden group-hover:flex justify-between px-24'>
                     <div>
-                      <p className='cursor-pointer hover:underline text-xs font-semibold my-4'>View all</p>
+                      <p onClick={() => handleCategoryFilter(item.id)} className='cursor-pointer hover:underline text-xs font-semibold my-4'>View all</p>
                       {item.Subcategory.length > 0 && item.Subcategory.map((item, i) => {
-                        return <p key={i} onClick={() => handleFilter(item.id)} className='my-4 cursor-pointer hover:underline'>{item.name}</p>
+                        return <p key={i} onClick={() => handleSubcategoryFilter(item.id)} className='my-4 cursor-pointer hover:underline'>{item.name}</p>
                       })}
                     </div>
                     <div className='w-96 h-96 ml-40'>

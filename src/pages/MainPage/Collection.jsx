@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux';
 import { setData } from '../../redux/productSlice';
 import Loader from '../../Components/MainPage/Loader';
 import { Helmet } from 'react-helmet-async';
+import NoDataIcon from '../../Components/MainPage/NoDataIcon';
 
 const Collection = () => {
   const localGrid = localStorage.getItem('grid');
@@ -42,8 +43,7 @@ const Collection = () => {
 
   const { data } = useSearchProductsQuery(params);
   const { data: allProducts } = useGetAllProductQuery();
-  console.log(data);
-  
+
 
   useEffect(() => {
     if (data) {
@@ -51,10 +51,11 @@ const Collection = () => {
     }
   }, [data, dispatch]);
 
+
   return (
     <div className='w-[95%] mx-auto py-7'>
       <Helmet>
-        <title>{params?.includes('subcategoryId') ?  data?.data[0].subcategory.name : data?.data[0].category.name}</title>
+        <title>{data?.data?.length === 0 ? 'Guess' : params?.includes('subcategoryId') ? data?.data[0].subcategory.name : data?.data[0].category.name}</title>
       </Helmet>
       <BreadCrumbs />
       <Top grid={grid} setGrid={setGrid} />
@@ -63,16 +64,19 @@ const Collection = () => {
         <div className='w-1/5 lg:block hidden'>
           <FilterMenu />
         </div>
-        <div className={`lg:w-4/5 w-full gap-4 grid grid-cols-${grid}`}>
+        <div className={`lg:w-4/5 w-full gap-4 ${data?.data.length === 0 ? 'flex' : `grid grid-cols-${grid}`}`}>
           {!data ? (
             <Loader />
+          ) : data.data.length < 1 ? (
+            <NoDataIcon />
           ) : (
-            data?.data?.map((item, i) => (
+            data.data.map((item, i) => (
               <div key={i}>
                 <Card item={item} />
               </div>
             ))
           )}
+
         </div>
       </div>
       <div className='flex justify-center mt-12 mb-4'>

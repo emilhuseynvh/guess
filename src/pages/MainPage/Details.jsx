@@ -10,6 +10,7 @@ const Details = () => {
     const { id } = useParams();
     const [getProductById, { data: productDetails, isLoading }] = useGetProductByIdMutation();
 
+
     useEffect(() => {
         id && getProductById(id);
     }, [id, getProductById]);

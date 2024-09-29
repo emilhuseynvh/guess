@@ -2,7 +2,6 @@ import React from 'react'
 import CartElement from '../../Components/MainPage/Cart/CartElement'
 import MiniCartElement from '../../Components/MainPage/Cart/MiniCartElement'
 import CartBottom from '../../Components/MainPage/Cart/CartBottom'
-import BreadCrumbs from '../../Components/MainPage/BreadCrumbs'
 import { useGetCartQuery } from '../../redux/api'
 import { Helmet } from 'react-helmet-async'
 
@@ -15,9 +14,6 @@ const Cart = () => {
             <Helmet>
                 <title>Cart</title>
             </Helmet>
-            <div className='mt-6 mb-8'>
-                <BreadCrumbs />
-            </div>
             <p className='font-semibold text-sm mb-4'>Cart ({products?.length} items)</p>
             <div className='lg:flex justify-between'>
                 <div className='w-full lg:w-[60%]'>

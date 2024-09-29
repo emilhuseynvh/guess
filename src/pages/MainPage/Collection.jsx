@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom'; // useLocation və useNavigate hook-larını əlavə et
-import BreadCrumbs from '../../Components/MainPage/BreadCrumbs';
+import { useLocation, useNavigate } from 'react-router-dom';
 import FilterMenu from '../../Components/MainPage/Collection/FilterMenu';
 import Top from '../../Components/MainPage/Collection/Top';
 import Card from '../../Components/MainPage/Collection/Card';
@@ -57,7 +56,6 @@ const Collection = () => {
       <Helmet>
         <title>{data?.data?.length === 0 ? 'Guess' : params?.includes('subcategoryId') ? data?.data[0].subcategory.name : data?.data[0].category.name}</title>
       </Helmet>
-      <BreadCrumbs />
       <Top grid={grid} setGrid={setGrid} />
       <TopMobile />
       <div className='flex'>

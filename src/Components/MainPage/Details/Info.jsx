@@ -41,7 +41,7 @@ const Info = ({ product }) => {
             wishlist = wishlist.filter(wishlistItem => wishlistItem.id !== id);
         } else {
             likedItems.push(id);
-            wishlist.push(product); // Use product instead of item
+            wishlist.push(product);
         }
     
         localStorage.setItem('likedItems', JSON.stringify(likedItems));

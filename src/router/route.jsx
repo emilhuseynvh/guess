@@ -19,6 +19,7 @@ import Order from "../Components/MainPage/Account/Order";
 import Wishlist from "../pages/MainPage/Wishlist";
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
+import StoreLocator from "../pages/MainPage/StoreLocator";
 
 export const route = createBrowserRouter(
     createRoutesFromElements(
@@ -32,6 +33,7 @@ export const route = createBrowserRouter(
                 <Route path="/register" element={<Register />} />
                 <Route path="/account" element={<Account />} />
                 <Route path="/wishlist" element={<Wishlist />} />
+                <Route path="/store-locator" element={<StoreLocator />} />
             </Route>
             <Route path="/checkout" element={<Checkout />}>
                 <Route index path="/checkout" element={<CheckoutPage />} />

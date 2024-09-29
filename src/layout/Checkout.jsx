@@ -7,7 +7,7 @@ const Checkout = () => {
     return (
         <>
             <Helmet>
-                <title>Checkout</title>
+                <title> Guess | Checkout</title>
             </Helmet>
             <Header checkout={true} />
             <Outlet />

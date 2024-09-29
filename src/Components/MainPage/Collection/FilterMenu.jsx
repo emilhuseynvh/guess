@@ -41,9 +41,6 @@ const FilterMenu = () => {
 
     return (
         <div className='pr-4'>
-            <div className='flex justify-end'>
-                <p onClick={() => handleClearFilters()} className='text-xs cursor-pointer hover:underline'>Clear All</p>
-            </div>
             {filter.map((item, i) => (
                 <div key={i}>
                     <AccardionItem

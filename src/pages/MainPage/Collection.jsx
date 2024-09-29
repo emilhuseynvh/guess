@@ -54,7 +54,7 @@ const Collection = () => {
   return (
     <div className='w-[95%] mx-auto py-7'>
       <Helmet>
-        <title>{data?.data?.length === 0 ? 'Guess' : params?.includes('subcategoryId') ? data?.data[0].subcategory.name : data?.data[0].category.name}</title>
+        <title>{data?.data?.length === 0 ? 'Guess' : params?.includes('subcategoryId') ? 'Guess | ' + data?.data[0].subcategory.name : 'Guess | ' +  data?.data[0].category.name}</title>
       </Helmet>
       <Top grid={grid} setGrid={setGrid} />
       <TopMobile />

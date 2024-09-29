@@ -18,7 +18,7 @@ const Details = () => {
     return (
         <div className='w-[95%] mx-auto my-6 md:flex'>
             <Helmet>
-                <title>{productDetails?.name}</title>
+                <title>{'Guess | ' +  productDetails?.name}</title>
             </Helmet>
             {isLoading ? (
                 <Loader />

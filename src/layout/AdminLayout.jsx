@@ -9,7 +9,7 @@ const AdminLayout = () => {
   return (
     <div id='dashboard' className='overflow-y-hidden h-screen'>
       <Helmet>
-        <title>Dashboard</title>
+        <title> Guess | Dashboard</title>
       </Helmet>
 
       <Toaster position="top-center" reverseOrder={false} />

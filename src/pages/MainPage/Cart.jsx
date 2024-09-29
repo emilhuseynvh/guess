@@ -12,7 +12,7 @@ const Cart = () => {
     return (
         <div className='w-[95%] mx-auto'>
             <Helmet>
-                <title>Cart</title>
+                <title>Guess | Cart</title>
             </Helmet>
             <p className='font-semibold text-sm mb-4'>Cart ({products?.length} items)</p>
             <div className='lg:flex justify-between'>

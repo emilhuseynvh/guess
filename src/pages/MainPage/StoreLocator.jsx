@@ -1,6 +1,7 @@
 import React from 'react'
 import Info from '../../Components/MainPage/Locator/Info'
 import Map from '../../Components/MainPage/Locator/Map'
+import { Helmet } from 'react-helmet-async'
 
 const store = [
     {
@@ -57,6 +58,9 @@ const store = [
 const StoreLocator = () => {
     return (
         <div className='w-full flex-col-reverse lg:flex-row flex  my-8'>
+            <Helmet>
+                <title> Guess | Store Locator</title>
+            </Helmet>
             <div className='lg:w-1/3 py-5 px-4 h-[500px] scroll overflow-y-auto'>
                 {store.map((item, i) => <Info key={i} item={item} />)}
             </div>

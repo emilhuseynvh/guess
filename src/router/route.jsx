@@ -20,6 +20,7 @@ import Wishlist from "../pages/MainPage/Wishlist";
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 import StoreLocator from "../pages/MainPage/StoreLocator";
+import AccountInfo from "../Components/MainPage/Account/AccountInfo";
 
 export const route = createBrowserRouter(
     createRoutesFromElements(
@@ -31,7 +32,6 @@ export const route = createBrowserRouter(
                 <Route path="/cart" element={<Cart />} />
                 <Route index path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/account" element={<Account />} />
                 <Route path="/wishlist" element={<Wishlist />} />
                 <Route path="/store-locator" element={<StoreLocator />} />
             </Route>
@@ -42,6 +42,10 @@ export const route = createBrowserRouter(
                 <Route index element={<DashboardProduct />} />
                 <Route path="category" element={<DashboardCategory />} />
                 <Route path="brand" element={<DashboardBrand />} />
+            </Route>
+            <Route  path="/account" element={<Account />}>
+                <Route index path="/account" element={<AccountInfo />} />
+                <Route index path="/account/orders" element={<Order />} />
             </Route>
         </>
     )

@@ -1,8 +1,16 @@
-import React, {  useState } from 'react'
+import React, { useState } from 'react'
 import Profile from '../../Components/MainPage/Account/Profile';
 import Order from '../../Components/MainPage/Account/Order';
 import AccountInfo from '../../Components/MainPage/Account/AccountInfo';
 import Wishlist from './Wishlist';
+import AccountSideBar from '../../Components/MainPage/Account/AccountSideBar';
+import Header from '../../Components/MainPage/Header';
+import Footer from '../../Components/MainPage/Footer';
+import { Outlet } from 'react-router-dom';
+import Banner from '../../Components/MainPage/Account/Banner';
+import { ToastContainer } from 'react-toastify';
+import { Toaster } from 'react-hot-toast';
+import { Helmet } from 'react-helmet-async';
 
 
 const Account = () => {
@@ -12,21 +20,21 @@ const Account = () => {
   const [image, setImage] = useState(null)
 
   return user ? (
-    <div className='lg:w-[80%] mx-auto :w-[100%]'>
-      <div className='md:flex justify-center my-4 relative'>
-        <img src='assets/img/account-header.webp' alt="Account Header" />
-        <h1 className='absolute text-white text-xl sm:text-5xl font-semibold top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 '>Hello, {user?.name}</h1>
-      </div>
-      <div className='md:flex'>
-        <Profile image={image} setImage={setImage} row={row} setRow={setRow} user={user} />
-        <div className={`${row === null ? 'block' : 'hidden'} w-full`}>
-          <AccountInfo image={image} setImage={setImage} />
+    <>
+      <Helmet>
+        <title>Guess | Account</title>
+      </Helmet>
+      <Header />
+      <Banner />
+      <Toaster position="top-center" reverseOrder={false} />
+      <div className='lg:w-4/5 mx-auto lg:flex'>
+        <div className='lg:w-[350px] lg:py-24 lg:border-r border-b'>
+          <AccountSideBar />
         </div>
-        <div className={`${row === 1 ? 'block' : 'hidden'} ml-8 w-full`}>
-          <Order />
-        </div>
+        <Outlet />
       </div>
-    </div>
+      <Footer />
+    </>
   ) : (
     <h1 className=' text-2xl text-center my-8 md:text-4xl'>Page not found</h1>
   )

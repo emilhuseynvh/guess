@@ -3,14 +3,17 @@ import { IoClose } from 'react-icons/io5'
 import { useCartChangeMutation, useDeleteFromCartMutation } from '../../../redux/api'
 
 const CartElement = ({ item }) => {
+    console.log(item);
+    
 
-    const { id, images, name, price, total } = item.product_id
+    const { id, Size, images, name, price, discount } = item.product_id
+    
     const [itemId, { data, error }] = useDeleteFromCartMutation()
     const [changeParams, { data: changedData, error: ChangedError, isLoading }] = useCartChangeMutation()
 
 
     const handleDelete = () => {
-        itemId(id)
+        itemId(item.id)
     }
 
     const handleChange = (arg) => {
@@ -26,8 +29,8 @@ const CartElement = ({ item }) => {
             <div className='flex justify-between w-full'>
                 <div className='pl-8 w-1/2 lg:w-1/3'>
                     <p className='text-base font-medium mb-[5px]'>{name}</p>
-                    <p className='text-base font-semibold mb-[5px]'>$69.95</p>
-                    <p className=''>Size: Xs</p>
+                    <p className='text-base font-semibold mb-[5px]'>{(price * discount / 100).toFixed(2)}</p>
+                    <p className=''>Size: {item.Size}</p>
                 </div>
                 <div>
                     <div className='flex items-center border border-[#e6e6e6] w-[90px]'>

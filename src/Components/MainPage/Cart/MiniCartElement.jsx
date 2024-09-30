@@ -2,6 +2,7 @@ import React from 'react'
 import { useCartChangeMutation, useDeleteFromCartMutation } from '../../../redux/api'
 
 const MiniCartElement = ({ item, cart }) => {
+    
 
 
     const { id, images, name, price, total } = item.product_id

@@ -84,7 +84,7 @@ const Header = ({ checkout }) => {
             <p className={`${checkout ? 'hidden' : 'hidden base:block'} text-[.81rem] font-medium pr-4 mr-4 border-r-[1px] border-r-[#eee] select-none `}>Hi, <Link to={!localStorage.getItem('username') && '/login'} className='font-normal underline cursor-pointer'>{localStorage.getItem('username') ? localStorage.getItem('username') : 'Sign-in or register'}</Link></p>
             <ul className={`${localStorage.getItem('username') && 'group-hover:block'} hidden absolute bg-white px-4 z-10 py-2 text-xs`}>
               <li onClick={() => navigate('/account')} className='my-1 cursor-pointer hover:underline'>My Account</li>
-              <li onClick={() => { localStorage.removeItem('username'); localStorage.removeItem('token'); location.reload() }} className='my-1 cursor-pointer hover:underline'>Sign-out</li>
+              <li onClick={() => { localStorage.removeItem('username'); localStorage.removeItem('token'); localStorage.removeItem('user');  location.reload() }} className='my-1 cursor-pointer hover:underline'>Sign-out</li>
             </ul>
           </div>
           {/* REGISTER LOGIN SECTION END */}
@@ -97,7 +97,7 @@ const Header = ({ checkout }) => {
               <ul className={`${search ? 'block' : 'hidden'} ${closeSearch ? 'hidden' : 'block'} absolute left-0 md:-left-[440px] max-h-96 scroll z-40 w-[100vw] md:w-[435px] overflow-auto bg-white top-[90px] md:top-8 px-2 py-2`}>
                 {searchData?.length > 0 ? (
                   searchData.map((item, i) => (
-                    <li onClick={() => { navigate((`products/all/details/${item.id}`)); setSearch(false) }} className='cursor-pointer border-b py-4 flex' key={i}>
+                    <li onClick={() => { navigate((`/products/all/details/${item.id}`)); setSearch(false) }} className='cursor-pointer border-b py-4 flex' key={i}>
                       <img className='w-16' src={item.images[0]} alt="" />
                       <div>
                         <p className='text-sm pl-3 my-1'>{item.name}</p>

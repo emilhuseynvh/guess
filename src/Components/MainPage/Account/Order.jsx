@@ -1,8 +1,11 @@
 import React from 'react'
+import NoDataIcon from '../NoDataIcon'
 
 const Order = () => {
   return (
-    <div>You haven't placed any orders yet.</div>
+    <div className='my-32 w-full mx-[120px]'>
+      <NoDataIcon text='You havent placed any orders yet' />
+    </div>
   )
 }
 

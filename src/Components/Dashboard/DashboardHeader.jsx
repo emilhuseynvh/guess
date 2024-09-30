@@ -7,7 +7,7 @@ const DashboardHeader = () => {
         <>
             <div className='bg-dashboardSecondary flex items-center fixed w-screen z-30'>
                 <div className='w-60 h-[68px] flex items-center justify-center border-r border-b border-[#FFFFFF1A]'>
-                    <img src="https://spruko.com/demo/xintra/dist/assets/images/brand-logos/desktop-dark.png" alt="Dashboard Logo" />
+                    <img className='w-32' src="assets/img/dashboard-header.png" alt="Dashboard Logo" />
                 </div>
                 <div className='pl-6 flex items-center justify-end w-[84vw]'>
                     <img className='w-8 h-8 rounded-[4px]' src="https://spruko.com/demo/xintra/dist/assets/images/faces/15.jpg" alt="Profile" />

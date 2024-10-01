@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const SimpleInput = ({ name, label, placeholder, onChange, type, value }) => {
+const SimpleInput = ({ name, label, placeholder, onChange, type, value, space }) => {
     const [error, setError] = useState('');
 
     const validate = (val) => {
@@ -14,17 +14,6 @@ const SimpleInput = ({ name, label, placeholder, onChange, type, value }) => {
             if (!numberRegex.test(val)) {
                 return 'Postcode can be a maximum of 4 digits';
             }
-        } else if (name === 'expirationDate') {
-            val = val.replace(/\D/g, '');
-
-            if (val.length > 4) {
-                val = val.slice(0, 4);
-            }
-            if (val.length >= 3) {
-                val = `${val.slice(0, 2)}/${val.slice(2)}`;
-            }
-            onChange({ target: { name, value: val } });
-            return '';
         } else if (!val) {
             return `${label} is required`;
         }
@@ -37,9 +26,8 @@ const SimpleInput = ({ name, label, placeholder, onChange, type, value }) => {
 
         const errorMessage = validate(val);
         setError(errorMessage);
-        if (!errorMessage || name === 'expirationDate') {
-            onChange({ ...e, target: { ...e.target, value: val } });
-        }
+
+        onChange({ ...e, target: { ...e.target, value: val } });
     };
 
     const handleBlur = (e) => {
@@ -49,13 +37,23 @@ const SimpleInput = ({ name, label, placeholder, onChange, type, value }) => {
     };
 
     return (
-        <div className="relative z-0 w-full my-6">
+        <div className={`${space ? 'mb-6 mt-0' : 'mb-12 mt-6'} relative z-0 w-full mt-6 `}>
             <label htmlFor={name}>{label}</label>
-            <input id={name} type={type} value={value} onChange={handleValidation} onBlur={handleBlur} className={`block px-2 w-full text-sm text-gray-900 border border-[#dedede] py-4 ${error ? 'border-red-500' : ''}`} placeholder={placeholder} required/>
+            <input
+                id={name}
+                type={type}
+                value={value}
+                onChange={handleValidation}
+                onBlur={handleBlur}
+                className={`block px-2 w-full text-sm text-gray-900 border border-[#dedede] py-4 ${error ? 'border-red-500' : ''}`}
+                placeholder={placeholder}
+                required
+            />
             {error && <p className="text-red-500 text-sm mt-1 absolute">{error}</p>}
         </div>
     );
 };
 
 export default SimpleInput;
+
 

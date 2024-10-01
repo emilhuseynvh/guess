@@ -7,16 +7,6 @@ import SimpleInput from './SimpleInput';
 
 const method = [
     {
-        card: true,
-        title: 'Credit card',
-        img: [
-            'assets/img/visa.svg',
-            'assets/img/master.svg',
-            'assets/img/amex.svg',
-            'assets/img/eftpos.svg'
-        ]
-    },
-    {
         paypal: true,
         desc: 'After clicking "Pay with PayPal", you will be redirected to PayPal to complete your purchase securely.',
         title: 'PayPal',

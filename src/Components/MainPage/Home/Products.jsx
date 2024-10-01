@@ -37,7 +37,7 @@ const product = [
 const Products = () => {
     return (
         <div className='w-full flex flex-col my-16 px-[5%]'>
-            <em className='text-[2rem] md:text-[3rem] text-center font-normal tracking-wider'>Make It Look Effortless</em>
+            <em className='text-[2rem] md:text-[3rem] text-center font-normal tracking-wider select-none'>Make It Look Effortless</em>
             <div className='flex flex-wrap gap-3 justify-center'>
                 {product.map((item, i) => <ProductCard key={i} item={item} />)}
             </div>

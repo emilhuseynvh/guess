@@ -63,11 +63,11 @@ const Address = () => {
             <SimpleInput label="Address" name="address" type="text" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Enter your address"/>
             <SimpleInput label="Apartment, suite, etc." name="apartment" type="text" value={apartment} onChange={(e) => setApartment(e.target.value)} placeholder="Enter apartment or suite" />
 
-            <div className='sm:flex items-end'>
+            <div className='sm:flex items-center'>
                 <div className='sm:w-1/3'>
                     <SimpleInput label="City" name="city" type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder="Enter your city" />
                 </div>
-                <div className='sm:w-1/3 sm:mx-4'>
+                <div className='sm:w-1/3 sm:mx-4 mt-6'>
                     <Select name="state" label="State/territory" option={stateOptions} value={stateValue} onChange={(e) => setStateValue(e.target.value)} />
                 </div>
                 <div className='sm:w-1/3'>

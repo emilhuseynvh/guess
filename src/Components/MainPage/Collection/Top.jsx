@@ -13,14 +13,6 @@ const Top = ({ grid, setGrid }) => {
 
     const sorted = [
         {
-            name: 'Recommended'
-        },
-        {
-            name: 'Latest',
-            sort: 'time',
-            order: 'desc'
-        },
-        {
             name: 'Price: low to high',
             sort: 'price',
             order: 'asc'

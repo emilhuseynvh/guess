@@ -30,9 +30,8 @@ const SummaryPanel = () => {
   }
 
   return (
-    <div className='p-8 lg:w-3/4 max-h-[200vh] sticky top-1'>
+    <div className='p-8 lg:w-3/4 max-h-[290vh] sticky top-1'>
       <SummaryItem />
-
       <p className='mt-3'>Enter the promocode or gift card</p>
       <div className='mb-4 flex items-center'>
         <div className='w-full'>
@@ -47,10 +46,6 @@ const SummaryPanel = () => {
         <p className='ml-2'>{appliedCode || 'No promo code applied'}</p>
         <IoMdClose onClick={handleRemoveCode} className='absolute top-1/2 -translate-y-1/2 right-2 text-lg cursor-pointer' />
       </div>
-
-
-
-
       <div className="max-w-lg mx-auto p-6  text-gray-800">
         {/* Subtotal and Order discount */}
         <div className="mb-4">
@@ -70,8 +65,6 @@ const SummaryPanel = () => {
           </div>
         </div>
         <Shippping />
-
-        {/* Benefits Section */}
         <Benefit />
       </div>
     </div>

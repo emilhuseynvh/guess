@@ -2,10 +2,14 @@ import React, { useEffect, useState } from 'react'
 import birbank from './../../../../public/assets/img/birbank.png'
 import zip from './../../../../public/assets/img/zip.webp'
 import { useAddToCartMutation } from '../../../redux/api'
+import { useDispatch, useSelector } from 'react-redux'
+import { setLike } from '../../../redux/LikeSlice'
 
 const Info = ({ product }) => {
+    const dispatch = useDispatch()
+    const like = useSelector((state) => state.like.like);
+
     const { id, price, name, description, Size } = product
-    console.log(id);
 
     const [quant, setQuant] = useState(1)
     const [color, setColor] = useState(product?.Colors[0])
@@ -37,9 +41,11 @@ const Info = ({ product }) => {
         let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
     
         if (liked) {
+            dispatch(setLike(like - 1))
             likedItems = likedItems.filter(itemId => itemId !== id);
             wishlist = wishlist.filter(wishlistItem => wishlistItem.id !== id);
         } else {
+            dispatch(setLike(like + 1))
             likedItems.push(id);
             wishlist.push(product);
         }
@@ -103,7 +109,7 @@ const Info = ({ product }) => {
             <div className='flex mt-5 mb-[15px] items-center justify-between'>
                 <div onClick={() => handleLike()} className='flex items-center cursor-pointer'>
                     <svg aria-hidden="true" focusable="false" role="presentation" className="icon icon-heart icon--stroke-based w-6 h-6" data-modal-type="show-list-selection" data-variant-id="39975283261512" data-product-id="6770022023240" data-product-url="https://guess.com.au/products/eco-beige-treated-flower-jumper-m4gq14kc6v1" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.0057 19.5216L4.36699 12.6025C0.21554 8.45103 6.31817 0.48025 12.0057 6.92884C17.6931 0.48025 23.7681 8.47871 19.6443 12.6025L12.0057 19.5216Z" stroke="black" strokeWidth="1.71429" strokeLinecap="round" strokeLinejoin="round" className="" data-modal-type="show-list-selection" data-variant-id="39975283261512" data-product-id="6770022023240" data-product-url="https://guess.com.au/products/eco-beige-treated-flower-jumper-m4gq14kc6v1"></path></svg>
-                    <p className='pl-[5px] underline text-sm font-medium'>{liked ? 'Added to Wishlist' : 'Add to favourites' }</p>
+                    <p className='pl-[5px] underline text-sm font-medium select-none'>{liked ? 'Added to Wishlist' : 'Add to favourites' }</p>
                 </div>
                 <div className='flex items-center'>
                     <svg aria-hidden="true" focusable="false" role="presentation" className="icon icon-share icon--stroke-based" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M24.9998 10.1538H17.3845C16.65 10.1538 15.9457 10.4456 15.4263 10.9649C14.907 11.4843 14.6152 12.1886 14.6152 12.9231V16.3846" stroke="black" strokeWidth="1.71" strokeLinecap="round" strokeLinejoin="round"></path><path d="M20.8457 14.3077L24.9995 10.1538L20.8457 6" stroke="black" strokeWidth="1.71" strokeLinecap="round" strokeLinejoin="round"></path><path d="M22.2308 18.4615V25.3846C22.2308 25.7518 22.0849 26.104 21.8252 26.3637C21.5656 26.6233 21.2134 26.7692 20.8462 26.7692H8.38462C8.01739 26.7692 7.66521 26.6233 7.40554 26.3637C7.14588 26.104 7 25.7518 7 25.3846V14.3077C7 13.9405 7.14588 13.5883 7.40554 13.3286C7.66521 13.0689 8.01739 12.9231 8.38462 12.9231H10.4615" stroke="black" strokeWidth="1.71" strokeLinecap="round" strokeLinejoin="round"></path></svg>

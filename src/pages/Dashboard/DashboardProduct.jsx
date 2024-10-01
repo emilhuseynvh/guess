@@ -27,10 +27,6 @@ const DashboardProduct = () => {
     input && inputValue(input)
   }, [input])
 
-
-  console.log('salam');
-
-
   return isLoading ? (
     <Loader admin={true} />
   ) : (

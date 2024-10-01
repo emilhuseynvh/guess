@@ -9,7 +9,7 @@ const CheckoutPage = () => {
         <div className='lg:w-1/2'>
           <CheckoutForm />
         </div>
-        <div className='lg:w-1/2 w-full lg:ml-6 lg:h-[220vh] bg-[#f5f5f5]'>
+        <div className='lg:w-1/2 w-full lg:ml-6 lg:h-[350vh] bg-[#f5f5f5]'>
           <SummaryPanel />
         </div>
       </div>

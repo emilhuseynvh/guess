@@ -86,7 +86,7 @@ const CheckoutForm = () => {
                         <p className='ml-2 text-sm'>Text me with news and offers</p>
                     </div>
 
-                    <div className={`${checkbox ? 'max-h-96' : 'max-h-0'} transition-[max-height] duration-2000 ease-linear overflow-hidden`}>
+                    <div className={`${checkbox ? 'max-h-[5000px]' : 'max-h-0'} transition-[max-height] duration-2000 ease-linear overflow-hidden`}>
                         <SimpleInput label="Mobile phone number" name="mobile" type="number" value={mobile} onChange={(e) => setMobile(e.target.value)} placeholder="Enter the mobile number" />
                         <p className='text-xs font-medium'>By signing up via text, you agree to receive recurring automated marketing messages, including cart reminders, at the phone number provided. Consent is not a condition of purchase. Reply STOP to unsubscribe. Reply HELP for help. Message frequency varies. Msg & data rates may apply. View our Privacy Policy and Terms of Service. </p>
                     </div>

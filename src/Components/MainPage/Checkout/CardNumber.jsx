@@ -20,7 +20,7 @@ const CardNumber = () => {
             </div>
             <div className='w-full flex'>
                 <div className='w-1/2'>
-                    <SimpleInput name="expirationDate" label="Expiration date (MM / YY)" type="text" placeholder="MM / YY" onChange={handleInputChange} />
+                    <SimpleInput name="expirationDate" label="Date" type="text" placeholder="MM / YY" onChange={handleInputChange} />
                 </div>
                 <div className='w-1/2 ml-4'>
                     <SimpleInput name="securityCode" label="Security code" type="text" placeholder="Enter security code" onChange={handleInputChange} />

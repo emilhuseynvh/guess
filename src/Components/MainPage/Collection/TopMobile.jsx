@@ -92,7 +92,6 @@ const TopMobile = () => {
             <div className={`${filter ? 'top-0' : '-top-[200%]'} duration-300 fixed w-full h-screen  left-0 right-0 bg-white z-50 px-4 pt-4 pb-6`}>
                 <div className='flex justify-between items-center pb-6 pt-2 border-b border-black'>
                     <p className='text-lg font-semibold'>Filter</p>
-                    <p className='text-sm font-medium'>(186 styles)</p>
                     <svg onClick={() => setFilter(!filter)} aria-hidden="true" focusable="false" role="presentation" className="cursor-pointer" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19.5 5L5 19.5" stroke="black" strokeWidth="1.71429" strokeLinecap="round" strokeLinejoin="round"></path><path d="M5 5L19.5 19.5" stroke="black" strokeWidth="1.71429" strokeLinecap="round" strokeLinejoin="round"></path></svg>
                 </div>
                 {filterMobile.map((item, i) => (

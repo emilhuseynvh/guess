@@ -121,7 +121,7 @@ const Header = ({ checkout }) => {
           </div>
           <div onClick={() => navigate('/wishlist')} className='flex items-center mr-3'>
             <svg aria-hidden="true" focusable="false" role="presentation" className={`${checkout ? 'hidden' : 'block'} icon icon-heart icon--stroke-based cursor-pointer`} data-modal-type="show-list-selection" data-variant-id="" data-product-id="" data-product-url="https://guess.com.au" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.0057 19.5216L4.36699 12.6025C0.21554 8.45103 6.31817 0.48025 12.0057 6.92884C17.6931 0.48025 23.7681 8.47871 19.6443 12.6025L12.0057 19.5216Z" stroke="black" strokeWidth="1.71429" strokeLinecap="round" strokeLinejoin="round" className="" data-modal-type="show-list-selection" data-variant-id="" data-product-id="" data-product-url="https://guess.com.au"></path></svg>
-            <p className='text-xs font-light ml-[3.5px] select-none'>{like}</p>
+            <p className={`${checkout ? 'hidden' : 'block'} text-xs font-light ml-[3.5px] select-none`}>{like}</p>
           </div>
           <div className='md:relative'>
             <button onClick={() => handleClick()} className='mr-3 flex items-center'>

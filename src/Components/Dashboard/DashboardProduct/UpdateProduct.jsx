@@ -9,7 +9,6 @@ import toast from 'react-hot-toast';
 const UpdateProduct = () => {
     const dispatch = useDispatch();
     const { productUpdate } = useSelector((state) => state.productUpdate);
-    console.log(productUpdate);
     
 
     const [getProductById, { data: productData, error: productError, isLoading: isProductLoading }] = useGetProductByIdMutation();

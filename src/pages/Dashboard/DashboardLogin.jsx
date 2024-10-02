@@ -27,12 +27,8 @@ const DashboardLogin = () => {
     }
 
     const [adminLogin, { data }] = useLoginMutation()
-    console.log(data);
-
 
     const notify = (arg) => toast.error(arg);
-
-
 
     return (
         <div className='bg-[#eee] mx-auto w-screen h-screen'>
@@ -43,14 +39,11 @@ const DashboardLogin = () => {
                 }}
                 validationSchema={validationSchema}
                 onSubmit={(values) => {
-                    console.log(values);
                     adminLogin({
                         username: values.username,
                         password: values.password,
                     })
                         .then((response) => {
-                            console.log(response);
-
                             handleNavigate(response, values)
                         })
                 }}

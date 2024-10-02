@@ -37,7 +37,6 @@ const CheckoutForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log({ email, mobile });
     };
 
     return (

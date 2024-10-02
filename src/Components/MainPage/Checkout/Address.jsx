@@ -25,7 +25,6 @@ const Address = () => {
     const [phone, setPhone] = useState('');
     const [country, setCountry] = useState('');
     useEffect(() => {
-        console.log(firstName);
     }, [firstName, setFirstName])
     
 
@@ -43,7 +42,6 @@ const Address = () => {
             phone,
             country
         };
-        console.log(formValues);
     };
 
     return (

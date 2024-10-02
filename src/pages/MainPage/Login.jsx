@@ -30,7 +30,6 @@ const Login = () => {
   }
 
   const [userLogin, { data, error }] = useLoginMutation();
-  console.log(data, error);
 
   const notify = (arg) => toast.error(arg);
 

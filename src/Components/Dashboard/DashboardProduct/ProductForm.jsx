@@ -55,7 +55,6 @@ const ProductForm = ({ initialValues, onSubmit }) => {
             formData.append('image', file);
             const response = await sendFormData(formData).unwrap();
             if (response.file && response.file.location) {
-                console.log(uploadedFiles);
 
                 setUploadedFiles([...uploadedFiles, response.file.location]);
                 toast.success('Image uploaded successfully');

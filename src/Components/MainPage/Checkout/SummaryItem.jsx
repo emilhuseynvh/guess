@@ -4,7 +4,6 @@ import NoDataIcon from '../NoDataIcon';
 
 const SummaryItem = () => {
     const { data: products, error } = useGetCartQuery();
-    console.log(products);
     
 
     if (error) {

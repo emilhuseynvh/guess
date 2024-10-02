@@ -14,7 +14,6 @@ const DashboardBrand = () => {
     const { open } = useSelector((state) => state.open);
 
     const { data: allBrands, isLoading } = useGetAllBrandsQuery();
-    console.log(allBrands);
 
     const [createBrand, { data: createData, error: createError, isSuccess: createSuccess, isError: createIsError }] = useCreateBrandMutation();
     const [updateBrand, { data: updateData, error: updateError, isSuccess: updateSuccess, isError: updateIsError }] = useUpdateBrandMutation();
@@ -42,7 +41,6 @@ const DashboardBrand = () => {
     }, [deleteSuccess, deleteIsError])
 
     const handleDelete = async (id) => {
-        console.log(id);
         await deleteBrand(id);
     };
 

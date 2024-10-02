@@ -7,7 +7,6 @@ const CardNumber = () => {
     const [checkbox, setCheckbox] = useState(false);
 
     const handleInputChange = (e) => {
-        console.log(`${e.target.name}: ${e.target.value}`);
     };
 
     return (

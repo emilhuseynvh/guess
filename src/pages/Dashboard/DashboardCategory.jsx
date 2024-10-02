@@ -23,7 +23,6 @@ const DashboardCategory = () => {
     const [createCategory, { data: createData, error: createError, isSuccess: createSuccess, isError: createIsError }] = useCreateCategoryMutation();
     const [updateCategory, { data: updateData, error: updateError, isSuccess: updateSuccess, isError: updateIsError }] = useUpdateCategoryMutation();
     const [deleteCategory, { error: deleteError, isSuccess: deleteSuccess, isError: deleteIsError }] = useDeleteCategoryMutation();
-    console.log(deleteError);
 
 
     const [name, setName] = useState('');
@@ -46,7 +45,6 @@ const DashboardCategory = () => {
     }, [deleteSuccess, deleteIsError]);
 
     const handleDelete = async (id) => {
-        console.log(id);
 
         await deleteCategory(id);
     };

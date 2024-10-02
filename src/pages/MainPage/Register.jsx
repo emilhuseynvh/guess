@@ -68,7 +68,6 @@ const validationSchema = Yup.object({
 
 const Register = () => {
   const [registerMutation, { data, error, isError, isSuccess, isLoading }] = useRegisterMutation();
-  console.log(data, error);
 
   const navigate = useNavigate()
 
@@ -109,7 +108,6 @@ const Register = () => {
           }}
           validationSchema={validationSchema}
           onSubmit={(values, { setSubmitting }) => {
-            console.log(values);
             registerMutation({
               name: values.name,
               username: values.username,

@@ -9,11 +9,7 @@ import toast from 'react-hot-toast';
 import { eSize, eColor } from '../../../enum/enumData';
 
 const ProductForm = ({ initialValues, onSubmit }) => {
-    console.log(initialValues);
-
     const [id, setId] = useState()
-
-
 
     const dispatch = useDispatch();
     const [sendFormData, { data, error }] = useUploadImgMutation();

@@ -21,7 +21,6 @@ const DashboardProduct = () => {
 
   const { data: allProducts, error, isLoading } = useGetAllProductQuery()
   const [inputValue, { data: searchData, error: searchError }] = useSearchProductByInputMutation()
-  console.log(searchData, searchError);
 
   useEffect(() => {
     input && inputValue(input)

@@ -9,10 +9,11 @@ import toast from 'react-hot-toast';
 const UpdateProduct = () => {
     const dispatch = useDispatch();
     const { productUpdate } = useSelector((state) => state.productUpdate);
+    console.log(productUpdate);
+    
 
     const [getProductById, { data: productData, error: productError, isLoading: isProductLoading }] = useGetProductByIdMutation();
     const [updateProduct, { data: updateData, error: updateError, isSuccess: isUpdateSuccess }] = useUpdateProductMutation();
-    console.log(productData);
     
 
     useEffect(() => {
@@ -22,7 +23,6 @@ const UpdateProduct = () => {
     }, [productUpdate, getProductById]);
 
     const handleSubmit = async (productDetails) => {
-        console.log(productDetails);
         
         const updatedDetails = {
             ...productDetails,

@@ -10,7 +10,7 @@ import { MdClose } from 'react-icons/md';
 import Loader from './Loader';
 
 const Header = ({ checkout }) => {
-  const listImage = ['assets/img/header-list1.webp', 'assets/img/header-list2.webp', 'assets/img/header-list4.webp', 'assets/img/header-list3.webp',]
+  const listImage = ['assets/img/header-list1.webp', 'assets/img/header-list2.webp', 'assets/img/header-list3.webp' ,'assets/img/header-list4.webp',]
 
   const [search, setSearch] = useState(false)
   const [cart, setCart] = useState(false)
@@ -70,7 +70,7 @@ const Header = ({ checkout }) => {
                       })}
                     </div>
                     <div className='w-96 h-96 ml-40'>
-                      <img src={`./../../../../assets/img/header-list${i + 1}.webp`} alt="Category Image" />
+                      <img src={`./../../../../assets/img/header-list${i + 1}.${i === 4 ? 'jpg' : 'webp' }`} alt="Category Image" />
                     </div>
                   </div>
                 </div>

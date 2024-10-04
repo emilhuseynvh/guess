@@ -68,24 +68,28 @@ const Card = ({ item }) => {
             <FaRegHeart onClick={handleLike} className='w-5 h-5 cursor-pointer' />
           )}
         </div>
-        <img onClick={() => handleClick()} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} className='select-none cursor-pointer mb-[10px] w-full' src={hovered && images[1] ? images[1] : images[0]} alt="Image"/>
-        <button onClick={() => setSize(!size)} className='absolute bottom-3 right-3 text-xs px-2 bg-[#F9F9F9] border border-[#b6b6b6b3] rounded-[.375rem] h-[1.875rem]'>Add {size ? '-' : '+'}</button>
+        <img onClick={() => handleClick()} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} className='select-none cursor-pointer mb-[10px] w-full' src={hovered && images[1] ? images[1] : images[0]} alt="Image" />
+        <div className='relative'>
+          <button onClick={() => setSize(!size)} className='absolute bottom-3 right-3 text-xs px-2 bg-[#F9F9F9] border border-[#b6b6b6b3] rounded-[.375rem] h-[1.875rem]'>Add {size ? '-' : '+'}</button>
+          <div style={{ boxShadow: '0 0 rgba(0, 0, 0, 0), 0 0 rgba(0, 0, 0, 0), 0 4px 6px -1px rgba(0, 0, 0, 0.1)' }} className={`${size ? 'block' : 'hidden'} absolute  rounded-[.375rem] z-50 p-5 bg-[#F9F9F9] top-0 left-1/2 -translate-x-1/2 w-[90%]`}>
+            <div>
+              <h3 className='md:text-base text-sm'>Select a size:</h3>
+              <ul className='flex flex-wrap pt-2'>
+                {Size.map((item, i) => <li onClick={() => handleAdd(i)} key={i} className='pr-4 md:text-base text-sm cursor-pointer hover:underline'>{item}</li>)}
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
       <div>
         <h4 className='font-semibold text-sm leading-[1.5] mb-[5px]'>{name}</h4>
-        <div className='flex items-start gap-2'>
-          <p className={`${discount && 'line-through'} text-gray-400 font-normal text-sm mb-[10px]`}>$ {price}</p>
-          <p className={`${discount ? 'block' : 'hidden'}`}>${discount && Math.floor(price - (price / 100 * discount))}</p>
+        <div className='flex  gap-2'>
+          <p className={`${discount && 'line-through'} mt-0.5 text-gray-400 font-normal text-sm mb-[10px]`}>$ {price}</p>
+          <div className=''>
+            <p className={`${discount ? 'block' : 'hidden'}`}>${discount && Math.floor(price - (price / 100 * discount))}</p>
+          </div>
         </div>
-        <p className='text-[#ee3a43] text-sm font-normal'>25% Off With Code APASNI</p>
-      </div>
-      <div style={{ boxShadow: '0 0 rgba(0, 0, 0, 0), 0 0 rgba(0, 0, 0, 0), 0 4px 6px -1px rgba(0, 0, 0, 0.1)' }} className={`${size ? 'block' : 'hidden'} absolute  rounded-[.375rem] z-50 p-5 bg-[#F9F9F9] bottom-4 sm:bottom-1 md:bottom-[-7px] left-1/2 -translate-x-1/2 w-[90%]`}>
-        <div>
-          <h3>Select a size:</h3>
-          <ul className='flex flex-wrap pt-2'>
-            {Size.map((item, i) => <li onClick={() => handleAdd(i)} key={i} className='pr-4 cursor-pointer hover:underline'>{item}</li>)}
-          </ul>
-        </div>
+        <p className='text-[#ee3a43] text-sm font-normal'>25% Off With Code Guess</p>
       </div>
     </div>
   )

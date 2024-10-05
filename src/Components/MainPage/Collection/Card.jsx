@@ -57,7 +57,6 @@ const Card = ({ item }) => {
     setLiked(!liked);
   };
 
-
   return (
     <div className='w-full relative'>
       <div className='relative'>

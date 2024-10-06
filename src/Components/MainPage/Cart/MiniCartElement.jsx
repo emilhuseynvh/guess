@@ -3,8 +3,6 @@ import { useCartChangeMutation, useDeleteFromCartMutation } from '../../../redux
 
 const MiniCartElement = ({ item, cart }) => {
     
-
-
     const { id, images, name, price, total } = item.product_id
     const [itemId, { data, error }] = useDeleteFromCartMutation()
     const [changeParams, { data: changedData, error: ChangedError, isLoading }] = useCartChangeMutation()

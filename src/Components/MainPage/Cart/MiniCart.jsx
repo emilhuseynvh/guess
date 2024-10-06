@@ -2,11 +2,14 @@ import React, { useEffect } from 'react';
 import { IoMdClose } from "react-icons/io";
 import MiniCartElement from './MiniCartElement';
 import CartBottom from './CartBottom';
-import { useGetCartQuery } from '../../../redux/api';
+import { useGetCartQuery, useGetProductByIdMutation } from '../../../redux/api';
 import NoDataIcon from '../NoDataIcon';
 
 const MiniCart = ({ cart, setCart }) => {
-  const { data: products, error, isLoading } = useGetCartQuery();
+  const { data: products, error, isLoading, refetch } = useGetCartQuery();
+  const [productId,  {data, error:getProductError}] = useGetProductByIdMutation();
+  
+  const user = JSON.parse(localStorage.getItem('user'));
   
   return (
     <div className={`${cart ? 'block' : 'hidden'} scroll fixed md:absolute w-screen md:w-[400px] inset-0 md:inset-auto top-0 md:top-9 right-0 md:right-5 h-auto md:h-[700px] overflow-y-auto z-50 bg-white border border-black pt-[15px] px-[29px]`}>
